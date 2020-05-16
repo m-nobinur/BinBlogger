@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} BinBlogger {% endblock title %}
+
+{% block content %}
+  <!-- Main post-->
+  <section class="bg-white pb-5">
+    <div class="container-fluid px-0 pnb-4">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="post-thumnail">
+            <img class="img-fluid w-100" style='height:540px' src={{featured_post.post_thumbnail.url}} alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 mx-auto text-center">
+          <ul class="list-inline">
+            <li class="list-inline-item mr-3">
+              {% for c in featured_post.categories.all %}
+                {% if forloop.counter == 1 or forloop.counter == 2%}
+                  <a class="category-link font-weight-normal" href={{c.get_absolute_url}} style='border-right:1px solid white'> {{ c }} </a>
+                {% endif %}
+              {% endfor %}
+            </li>
+            <li class="list-inline-item mx-3"><a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=featured_post.author.username %}">{{featured_post.author}}</a></li>
+            <li class="list-inline-item mx-3"><p class="text-uppercase meta-link font-weight-normal">{{featured_post.created_on|date:"F d, Y"}}</p></li>
+          </ul>
+            <h1 class="mb-4"> <a class="reset-anchor" href={{featured_post.get_absolute_url}}>{{featured_post.title}}</a></h1>
+            <p class="text-muted">{{featured_post.content|striptags|truncatechars:220}}</p>
+            <a class="btn btn-link p-0 read-more-btn" href={{featured_post.get_absolute_url}}><span>Read more</span><i class="fas fa-long-arrow-alt-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top categories-->
+  <section class="pb-5">
+    <div class="container pb-4">
+      <div class="row mb-5 pb-4">
+        {% for cat in top3_categories %}
+          {% if forloop.counter == 1 %}
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-1.jpg' %}')" href={{cat.get_absolute_url}}>
+                <span class="category-block-title">{{cat}}</span>
+              </a>
+            </div>
+          {% endif %}
+          {% if forloop.counter == 2 %}
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-2.jpg' %}')" href={{cat.get_absolute_url}}>
+                <span class="category-block-title">{{ cat }}</span>
+              </a>
+            </div>
+          {% endif %}
+          {% if forloop.counter == 3 %}
+            <div class="col-lg-4"><a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-3.jpg' %}')" href={{cat.get_absolute_url}}><span
+            class="category-block-title">{{cat}}</span></a></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog listing-->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-lg-9 mb-5 mb-lg-0">
+          <!-- popular posts listing 2 grid-->
+          {% include 'blog/post_listing.html' with posts=popular_post %}
+        </div>
+
+        <!-- Blog sidebar-->
+        <div class="col-lg-3">
+          {% include 'sidebar.html' with latest_post=latest_post categories=categories tags=tags %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

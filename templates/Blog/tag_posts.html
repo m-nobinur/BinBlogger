@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  {% include 'blog/cat_tag_user_posts.html' with page_obj=page_obj tag_name=tag_name%}
+
+{% endblock content %}

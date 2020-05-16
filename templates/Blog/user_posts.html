@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} User's Post {% endblock title %}
+
+{% block content %}
+  <div class="container py-3">
+    <div class="row" style="box-shadow: 0px 2px 20px 1px pink;;margin-top: 15px;">
+      <div class="col-lg-12">
+        <div class="mb-2 mt-2">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card-body">
+                <img class='img-fluid w-60 d-block m-auto'
+                  style='height:260px;box-shadow: 1px 6px 18px 5px pink;border-radius: 5px;'
+                  src="{{author_user.profile.image.url}}" />
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="mb-2 mt-4 text-center">
+                <h2 class="text-info text-uppercase" style="font-family:fantasy;">
+                  {{author_user.first_name}} {{author_user.last_name}}
+                </h2>
+                <h6>@{{author_user.username}}</h6>
+                <h4 class="text-primary">{{author_user.profile.bio}}</h4>
+                <hr>
+                <p> <strong class="text-primary">Info : </strong> {{author_user.profile.about}} </p>
+                <hr>
+                <h3>
+                  <span class="text-primary mr-5">80 posts</span>
+                  <span class="text-successs">40 comments</span> 
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Blog listing section -->
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-lg-2"> </div>
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <h1 class="mb-5" style='font-family:monospace;color:green;'>Posts By {{author_user.first_name}} {{author_user.last_name}}</h1>
+          <!-- user's post listing-->
+          {% include 'blog/post_listing.html' with posts=page_obj %}
+          <!-- pagination-->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+              {% endif %}
+              {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+              <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{num}}</a></li>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li class="page-item"><a class="page-link" href="?page={{ num }}">{{num}}</a></li>
+              {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-2"> </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

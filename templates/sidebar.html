@@ -1,0 +1,55 @@
+{% load static %}      
+
+<!-- Recent posts-->
+  <div class="card rounded-0 border-0 mb-4">
+      <div class="card-body p-0">
+          <h2 class="h5 mb-3">Recent posts</h2>
+          {% for post in latest_post %}
+              <div class="media mb-3">
+                <a class="d-block" href={{post.get_absolute_url}}>
+                  <img class="img-fluid" src={{post.post_thumbnail.url}} alt="" width="70">
+                </a>
+                <div class="media-body ml-3">
+                  <h6><a class="reset-anchor" href={{post.get_absolute_url}}>{{post.title|truncatechars:25}}</a></h6>
+                  <p class="text-small text-muted line-height-sm mb-0">{{post.content|striptags|truncatechars:70}}</p>
+                </div>  
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+
+<!-- Categories-->
+  <div class="card rounded-0 border-0 mb-4">
+    <div class="card-body p-0">
+        <h2 class="h5 mb-3">Trending categories</h2>
+        {% for cat in categories %}
+            {% if forloop.counter == 1 %}
+              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/category-bg-1.jpg' %})" href={{cat.get_absolute_url}}>
+                <span class="category-block-title">{{cat}}</span>
+              </a>
+            {% endif %}
+            {% if forloop.counter == 2 %}
+              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/category-bg-2.jpg' %})" href={{cat.get_absolute_url}}>
+                <span class="category-block-title">{{cat}}</span>
+              </a>
+            {% endif %}
+            {% if forloop.counter == 3 %}
+              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/category-bg-3.jpg' %})" href={{cat.get_absolute_url}}>
+                <span class="category-block-title">{{cat}}</span>
+              </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+  </div>
+
+<!-- Tags-->
+  <div class="card rounded-0 border-0 mb-4">
+    <div class="card-body p-0">
+      <h2 class="h5 mb-3">Tags cloud</h2>
+      <ul class="list-inline">
+        {% for tag in tags %}
+            <li class="list-inline-item my-1 mr-2"><a class="sidebar-tag-link" href={% url 'tag_posts' tag=tag %}>{{ tag }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>

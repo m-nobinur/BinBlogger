@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Log In {% endblock title %}
+
+{% block content %}
+    <section class='pb-5'>
+        <div class="container pb-4" >
+          <div class="p-4 bg-light">
+            <div class="row align-items-center p-lg-3">
+                <div class="container">
+                    <form method="post" style="padding-top: 3rem;padding-bottom:3rem;">
+                        {% csrf_token %}
+                        <div class='container'>
+                            {{form|crispy}}
+                            <div class="text-center">
+                              <button class="btn btn-info btn-lg" type="submit" style = 'font-family:Roboto;'>Log In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+{% endblock content %}

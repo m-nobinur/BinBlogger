@@ -1,0 +1,135 @@
+{% load static %}
+
+<!-- Newsletter Section-->
+<section class='pb-5'>
+  <div class="container pb-4">
+    <div class="p-4 bg-light">
+      <div class="row align-items-center p-lg-3">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="h3 mb-1">Subscribe to my newsletter</h2>
+          <p class="mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <div class="col-lg-6">
+          <form action="#">
+            <div class="input-group">
+              <input class="form-control" type="search" placeholder="Enter your email address"
+                aria-label="email address" aria-describedby="button-addon2">
+              <div class="input-group-append ml-2">
+                <button class="btn btn-primary" id="button-addon2" type="submit">Subscribe</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram items-->
+<section>
+  <div class="instagram-section-title d-none d-sm-block">
+    <i class="fab fa-instagram mr-2"></i>
+    Follow me on Instagram @nobin_khan
+  </div>
+  <div class="container-fluid px-0">
+    <div class="row">
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-1.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-2.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-3.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-4.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-5.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+      <div class="col-lg-2 col-4 p-0">
+        <a class="d-block instagram-item" href="#">
+          <img class="img-fluid" src={% static 'img/instagram-6.jpg' %} alt="">
+          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--footer label-->
+<footer class="py-4" style="background: #111">
+  <div class="container text-center">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-lg-left">
+        <img src="{% static 'img/logo-footer.svg' %}" alt="..." width="120">
+      </div>
+
+      <div class="col-md-4 text-center">
+        <div class="d-flex align-items-center flex-wrap justify-content-center">
+          <h6 class="text-muted mb-0 py-2 mr-3">Follow me<span class="ml-3">-</span></h6>
+          <ul class="list-inline small mb-0 text-white">
+            <li class="list-inline-item"><a class="reset-anchor" href="#">
+                <i class="fab fa-facebook-f"></i></a>
+            </li>
+            <li class="list-inline-item"><a class="reset-anchor" href="#">
+                <i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item"><a class="reset-anchor" href="#">
+                <i class="fab fa-instagram"></i></a>
+            </li>
+            <li class="list-inline-item"><a class="reset-anchor" href="#">
+                <i class="fab fa-linkedin"></i></a>
+            </li>
+            <li class="list-inline-item"><a class="reset-anchor" href="#">
+                <i class="fab fa-youtube"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4 text-lg-right">
+        <p class="mb-0 text-muted text-small text-heading">copyright | <a href="#" class="text-reset">| Nobin Khan</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<!-- JavaScript files-->
+
+<!-- JQuery cdn-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<!-- bootstrap cdn-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!-- lighbox cdn-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
+<!-- custom js-->
+<script src={% static 'js/front.js' %}></script>
+
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">

@@ -1,0 +1,10 @@
+vscode
+env
+db.sqlite3
+**/*.pyc
+**/__pycache__
+media
+static
+Pipfile
+Pipfile.lock
+templates/count.html

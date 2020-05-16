@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>
+            {% block title %} {% endblock title %}
+        </title>
+        <!--static links-->
+        {% include 'head.html' %}
+    </head> 
+
+    <body>
+        <!--including header part-->
+        {% include 'header.html' %}
+        <!--main part of every page-->
+        {% block content %} {% endblock content %}
+        <!--including footer part-->
+        {% include 'footer.html' %}
+    </body>
+
+</html>

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="py-5">
+      <div class="container py-4">
+        <div class="row text-center">
+          <div class="col-lg-10 mx-auto">
+            {% for cat in post.categories.all %}
+              <a class="category-link mb-3 d-inline-block" href={{cat.get_absolute_url}}>{{cat}}</a>
+            {% endfor %}
+            <h1>{{post.title}}</h1>
+            <ul class="list-inline mb-5">
+              <li class="list-inline-item mx-2">
+                  <a class="text-uppercase text-muted reset-anchor" href="{% url 'user_posts' username=post.author.username %}">
+                    BY {{post.author.first_name}}
+                  </a>
+              </li>
+              <li class="list-inline-item mx-2">
+                  <a class="text-uppercase text-muted reset-anchor" href="#">
+                    {{post.created_on|date:"F d, Y"}}
+                  </a>
+              </li>
+              {% if post.author == user or user.is_superuser %}
+                <li class="list-inline-item mx-2">
+                    <a class="text-uppercase text-muted reset-anchor" href="{% url 'update_post' pk=post.pk %}">
+                      🖌Update
+                    </a>
+                </li>
+                <li class="list-inline-item mx-2">
+                    <a class="text-uppercase text-muted reset-anchor" data-toggle="modal" data-target="#exampleModal" href="#"> 
+                      🗑 Delete
+                     </a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <img class="w-100 mb-5" src="{{post.post_thumbnail.url}}" alt="...">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-10">
+            <p class="mb-4 drop-caps">{{post.content|safe}}</p>
+            <!-- Post tags-->
+            <div class="d-flex align-items-center flex-column flex-sm-row mb-4 p-4 bg-light">
+              <h3 class="h4 mb-3 mb-sm-0">Tags</h3>
+              <ul class="list-inline mb-0 ml-0 ml-sm-3">
+                {% for tag in tags %}
+                    <li class="list-inline-item my-1 mr-2"><a class="sidebar-tag-link" href={% url 'tag_posts' tag=tag %}>{{ tag }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <!-- Leave comment
+            <h3 class="h4 mb-4">Leave a comment</h3>
+            <form class="mb-5" action="#">
+              <div class="row">
+                <div class="form-group col-lg-6">
+                  <input class="form-control" type="text" name="name" placeholder="Full Name e.g. Jason Doe">
+                </div>
+                <div class="form-group col-lg-6">
+                  <input class="form-control" type="email" name="email" placeholder="Email Address e.g. Jason@email.com">
+                </div>
+                <div class="form-group col-lg-12">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Leave your message"></textarea>
+                </div>
+                <div class="form-group col-lg-12">
+                  <button class="btn btn-primary" type="submit">Submit your comment</button>
+                </div>
+              </div>
+            </form> -->
+            <!-- Post comments
+            <h3 class="h4 mb-4">Comments</h3>
+            <ul class="list-unstyled comments">
+              <li>
+                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-1.jpg" alt="" width="60">
+                  <div class="media-body ml-3">
+                    <p class="small mb-0 text-primary">15 Aug 2019</p>
+                    <h5>Jimmy Roy</h5>
+                    <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                  </div>
+                </div>
+                <ul class="list-unstyled ml-5">
+                  <li> 
+                    <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-2.jpg" alt="" width="60">
+                      <div class="media-body ml-3">
+                        <p class="small mb-0 text-primary">19 Sep 2019</p>
+                        <h5>Melissa Johanson</h5>
+                        <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-3.jpg" alt="" width="60">
+                  <div class="media-body ml-3">
+                    <p class="small mb-0 text-primary">10 Oct 2019</p>
+                    <h5>David Nguyen</h5>
+                    <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                  </div>
+                </div>
+              </li>
+            </ul> -->
+
+          </div>
+          <div class="col-lg-1"></div>
+        </div>
+      </div>
+    </section>
+  <!-- Post Delete Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hey !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action={% url 'delete_post' pk=post.pk %} method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+            Are you sure you want to delete ?
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-secondary" data-dismiss="modal">Cancle</a>
+            <button type="submit" class="btn btn-primary">confirm</button>
+          </div>
+        </form>
+       </div>
+    </div>
+  </div>
+  <!-- end Modal -->
+
+{% endblock content %}

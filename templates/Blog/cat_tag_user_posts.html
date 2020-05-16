@@ -1,0 +1,65 @@
+  <section class="py-5">
+     <div class="container py-4">
+       <div class="row">
+         <div class="col-lg-2"> </div>
+         <!-- Blog listing-->
+         <div class="col-lg-8 mb-5 mb-lg-0">
+           {% if tag_name %}
+              <h1 class="mb-5" style='font-family:monospace;color:green;'>Posts contain "{{tag_name|lower}}" tag</h1>
+           {% else %}
+              <h1 class="mb-5" style='font-family:monospace;color:green;'>All posts in {{cat_name}}</h1>
+           {% endif %}
+            <!--post listing-->
+           {% for post in page_obj %}
+            <div class="row align-items-center mb-5">
+              <div class="col-lg-6"><a class="d-block mb-4" href={{post.get_absolute_url}}>
+                  <img class="img-fluid w-100" src={{post.post_thumbnail.url}} alt="" /></a>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-inline">
+                  {% for c in post.categories.all %}
+                    {% if forloop.first or forloop.last%}
+                      <li class="list-inline-item mr-2"><a class="category-link font-weight-normal"
+                        href={{c.get_absolute_url}}>{{c}}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  <li class="list-inline-item mx-2">
+                    <a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=post.author.username %}">{{post.author.username}}</a>
+                  </li>
+                  <li class="list-inline-item mx-2">
+                    <a class="text-uppercase meta-link font-weight-normal" href="#">{{post.created_on|date:"F d, Y"}}</a>
+                  </li>
+                </ul>
+                <h2 class="h3 mb-4"> 
+                  <a class="d-block reset-anchor" href={{post.get_absolute_url}}>{{post.title}}</a>
+                </h2>
+                <p class="text-muted">{{post.content|striptags|truncatechars:190}}</p>
+                    <a class="btn btn-link p-0 read-more-btn" href={{post.get_absolute_url}}>
+                    <span>Read more</span> <i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+           {% endfor %}
+           <!--pagination-->
+           <nav aria-label="Page navigation example">
+             <ul class="pagination">
+               {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                </li>
+               {% endif %}
+               {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{num}}</a></li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                  <li class="page-item"><a class="page-link" href="?page={{ num }}">{{num}}</a></li>
+                {% endif %}
+               {% endfor %}
+               {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+               {% endif %}
+             </ul>
+          </nav>
+        </div>
+      <div class="col-lg-2"> </div>
+    </div>
+  </div>
+</section>
