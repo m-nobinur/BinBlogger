@@ -149,6 +149,11 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src = {% static 'js/profile.js' %}></script>
+    <script>
+       document.querySelector(".picture").innerHTML = `<img src="{{user.profile.image.url}}" class="picture-src" id="wizardPicturePreview" title="">
+        <i style='font-size:20px;margin-top:6.4px;margin-left:-6px' class="fas fa-camera"></i>
+        <input type="file" name="image" accept="image/*" id="id_image">`;
+    </script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   
