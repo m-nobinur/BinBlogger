@@ -29,12 +29,16 @@ def gen_top_categories(cat_list, num):
     '''
 
     top_categories = []
+    sorted_category = sorted([len(category.post_set.all()) for category in cat_list])[-num:]
     for category in cat_list:
         # get top 3 categories by sorting post_set for each category
-        if len(category.post_set.all()) in sorted([len(category.post_set.all())][-num:]):
+        if len(category.post_set.all()) in sorted_category:
             top_categories.append(category)
 
     return top_categories
+
+
+
 
 
 # view for index page and home page
