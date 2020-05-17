@@ -61,6 +61,29 @@
     </div>
   </section>
 
+  <!-- search Section-->
+  <section class='pb-2'>
+    <div class="container pb-2">
+      <div class="p-4 bg-dark" style = 'box-shadow: 0px 5px 12px 0px #00f3ffad;border-radius: 20px;'>
+        <div class="row align-items-center p-lg-3">
+          <div class="col-lg-3 mb-2 mb-lg-0">
+          </div>
+          <div class="col-lg-6">
+            <form action="{% url 'search' %}">
+              <div class="input-group">
+                <input style = 'border-radius:10px; font-family:roboto;' class="form-control" name ='q' type="search" placeholder="Search here......"
+                  aria-label="email address" aria-describedby="button-addon2">
+                <div class="input-group-append ml-2">
+                  <button class="btn btn-primary ml-2" style = 'border-radius:10px; font-family:roboto; 'id="button-addon2" type="submit">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Blog listing-->
   <section class="py-5">
     <div class="container py-4">

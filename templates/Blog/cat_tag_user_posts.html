@@ -6,10 +6,13 @@
          <div class="col-lg-8 mb-5 mb-lg-0">
            {% if tag_name %}
               <h1 class="mb-5" style='font-family:monospace;color:green;'>Posts contain "{{tag_name|lower}}" tag</h1>
+           {% elif query %}
+              <h1 class="mb-5" style='font-family:monospace;color:green;'>All posts in "{{cat_name|lower}}"</h1>
            {% else %}
-              <h1 class="mb-5" style='font-family:monospace;color:green;'>All posts in {{cat_name}}</h1>
+              <h1 class="mb-5" style='font-family:monospace;color:green;'>Search results on "{{query|lower}}"</h1>
            {% endif %}
             <!--post listing-->
+          {% if page_obj %}
            {% for post in page_obj %}
             <div class="row align-items-center mb-5">
               <div class="col-lg-6"><a class="d-block mb-4" href={{post.get_absolute_url}}>
@@ -39,6 +42,9 @@
               </div>
             </div>
            {% endfor %}
+          {% else %}
+              <h2 class='mt-5'> Sorry! No results found. Try again searching with different keyword.</h2>
+          {% endif %}
            <!--pagination-->
            <nav aria-label="Page navigation example">
              <ul class="pagination">

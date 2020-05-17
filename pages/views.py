@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Count, Q
+from django.core.paginator import Paginator
 from django.views.generic import( View,   
                                 TemplateView,                             
                                 )
@@ -69,6 +70,24 @@ class HomePageView(View):
         }
 
         return render(request, 'pages/home.html', context)
+
+# search view for pages/search.html
+class SearchView(View):
+    def get(self, request, *args, **kargs):
+        posts = Post.objects.all()
+        query = request.GET.get('q')
+        
+        # if query exists then filter posts by query
+        if query:
+            posts = posts.filter(Q(title__icontains=query) |
+                         Q(content__icontains=query)).distinct()
+          
+        context = {
+            'page_obj': posts,
+            'query': query,
+        }
+        
+        return render(request, 'pages/search.html', context)
 
 
 # view for about page/about.html
