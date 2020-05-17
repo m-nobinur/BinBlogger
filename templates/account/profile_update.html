@@ -2,69 +2,14 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>Profile Page</title>
-  {% include 'head.html' %}
-  <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
-</head>
+  <head>
+    <title>Profile Page</title>
+    {% include 'head.html' %}
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+  </head>
   <body>
-  <style>
-                      
-      /*Profile Pic Start*/
-      .picture-container{
-          position: relative;
-          cursor: pointer;
-          text-align: center;
-          width: 20%;
-      }
-      .picture{
-          width: 106px;
-          height: 106px;
-          background-color: #999999;
-          border: 4px solid #CCCCCC;
-          color: #FFFFFF;
-          border-radius: 50%;
-          margin: 0px auto;
-          overflow: hidden;
-          transition: all 0.2s;
-          -webkit-transition: all 0.2s;
-      }
-      .picture:hover{
-          border-color: #2ca8ff;
-      }
-      .content.ct-wizard-green .picture:hover{
-          border-color: #05ae0e;
-      }
-      .content.ct-wizard-blue .picture:hover{
-          border-color: #3472f7;
-      }
-      .content.ct-wizard-orange .picture:hover{
-          border-color: #ff9500;
-      }
-      .content.ct-wizard-red .picture:hover{
-          border-color: #ff3b30;
-      }
-      .picture input[type="file"] {
-          cursor: pointer;
-          display: block;
-          height: 100%;
-          left: 0;
-          opacity: 0 !important;
-          position: absolute;
-          top: 0;
-          width: 100%;
-      }
 
-      .picture-src{
-          width: 100%;
-          
-      }
-      /*Profile Pic End*/
-                
- </style>
     <div class="main-content">
-
       <!-- Header -->
       <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style="min-height:220px;background-size: cover; background-position: center top;">
@@ -194,7 +139,6 @@
                     <button type='submit' class="btn btn-md btn-default float-right mr-4 ml-4">Save & Edit</button>
                   </div>
                 </form>
-
               </div>
             </div>
           </div>
@@ -202,35 +146,11 @@
       </div>
     </div>
 
-
-
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script>
-
-    
-    $(document).ready(function(){
-      document.querySelector('.picture').innerHTML = `<img src="{{user.profile.image.url}}" class="picture-src" id="wizardPicturePreview" title="">
-        <i style='font-size:20px;margin-top:6.4px;margin-left:-6px' class="fas fa-camera"></i>
-      <input type="file" name="image" accept="image/*" id="id_image">`
-    // Prepare the preview for profile picture
-    $("#id_image").change(function(){
-        readURL(this);
-    });
-    });
-    function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-    
-    </script>
-<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-</body>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src = {% static 'js/profile.js' %}></script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  
+  </body>
 </html>
