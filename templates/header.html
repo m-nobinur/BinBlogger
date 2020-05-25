@@ -1,70 +1,133 @@
 {% load static %}
 
-  <!-- navbar-->
-  <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light py-4 index-forward bg-white">
-        <div class="container d-flex justify-content-center justify-content-lg-between align-items-center">
-          <ul class="list-inline small mb-0 text-dark d-none d-lg-block">
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-twitter"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-youtube"></i></a></li>
-          </ul>
-          <a class="navbar-brand" href="index.html"><img src="{% static 'img/logo.svg' %}" alt="..." width="150"></a>
-          <a class="reset-anchor text-small mb-0 h6 d-none d-lg-block" href="mailto:nobinkhan.me@gmail.com"><i class="far fa-envelope mr-2 text-primary"></i>nobinkhan.me@gmail.com</a>
-        </div>
-      </nav>
-      <nav class="navbar navbar-expand-lg navbar-light border-top border-bottom border-light">  
-        <div class="container">
-          <ul class="list-inline small mb-0 text-dark d-block d-lg-none">
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-twitter"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin"></i></a></li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-youtube"></i></a></li>
-          </ul>
-          <!--toggle buttons-->
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar link-->
-            <ul class="navbar-nav mx-auto align-items-center">
-              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href={% url 'home' %}>Home</a></li>      
-              <!-- dropdown -->
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="listingVariants" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog Listing</a>
-                <div class="dropdown-menu mt-2" aria-labelledby="listingVariants">
-                  <a class="dropdown-item" href="listing-1.html">Post column</a>
-                  <a class="dropdown-item" href="listing-2.html">Post row</a>
-                </div>
-              </li>
-              <!-- Navbar link-->
-              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href={% url 'blog' %}>Blog</a></li>    
-              <!-- dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-                <div class="dropdown-menu mt-2" aria-labelledby="account">
-                  {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="{% url 'add_post' %}">Add Post</a>
-                    <a class="dropdown-item" href="{% url 'profile_update' %}">Profile</a>
-                    <form method="post" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" >
-                        <a class="dropdown-item" href="#">
-                          <button id="signOutBtn" type="submit" style = 'background: none!important;border: none;padding: 0!important;'>Logout</button>
-                        </a>    
-                    </form>
-                  {% else %}
-                    <a class="dropdown-item" href="{% url 'account_login' %}">Log In</a>
-                    <a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a>
-                  {% endif %}
-                </div>
-              </li>
+{% with request.resolver_match.url_name as view_url %}
+{% if view_url != 'admim-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
+    <!-- navbar-->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-light py-4 index-forward bg-white">
+          <div class="container d-flex justify-content-center justify-content-lg-between align-items-center">
+            <ul class="list-inline small mb-0 text-dark d-none d-lg-block">
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-youtube"></i></a></li>
             </ul>
+            <a class="navbar-brand" href="index.html"><img src="{% static 'img/logo.svg' %}" alt="..." width="150"></a>
+            <a class="reset-anchor text-small mb-0 h6 d-none d-lg-block" href="mailto:nobinkhan.me@gmail.com"><i class="far fa-envelope mr-2 text-primary"></i>nobinkhan.me@gmail.com</a>
+          </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light border-top border-bottom border-light">  
+          <div class="container">
+            <ul class="list-inline small mb-0 text-dark d-block d-lg-none">
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin"></i></a></li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+            <!--toggle buttons-->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <!-- Navbar link-->
+              <ul class="navbar-nav mx-auto align-items-center">
+                <li class="nav-item"><a class="nav-link {% if view_url == 'home' %}active{% endif %}" href={% url 'home' %}>Home</a></li>      
+                <!-- dropdown -->
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="listingVariants" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog Listing</a>
+                  <div class="dropdown-menu mt-2" aria-labelledby="listingVariants">
+                    <a class="dropdown-item" href="listing-1.html">Post column</a>
+                    <a class="dropdown-item" href="listing-2.html">Post row</a>
+                  </div>
+                </li>
+                <!-- Navbar link-->
+                <li class="nav-item"><a class="nav-link {% if view_url == 'blog' %}active{% endif %}" href={% url 'blog' %}>Blog</a></li>    
+                <!-- dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                  <div class="dropdown-menu mt-2" aria-labelledby="account">
+                    {% if user.is_authenticated %}
+                      <a class="dropdown-item" href="{% url 'add_post' %}">Add Post</a>
+                      <a class="dropdown-item" href="{% url 'profile_update' %}">Profile</a>
+                    {% else %}
+                      <a class="dropdown-item" href="{% url 'account_login' %}">Log In</a>
+                      <a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a>
+                    {% endif %}
+                    {% if user.is_authenticated and user.is_superuser %}
+                      <a class="dropdown-item" href="{% url 'admim-dashboard' %}"> Admin Panel</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                      <form method="post" action="{% url 'account_logout' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="next" >
+                          <a class="dropdown-item" href="#">
+                            <button id="signOutBtn" type="submit" style = 'background: none!important;border: none;padding: 0!important;'>Logout</button>
+                          </a>    
+                      </form>
+                    {% endif %}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+    </header>
+  
+  {% else %}
+      <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark flex-md-nowrap" style='background-color: #3c779a!important;'>
+      <div class="container">
+      <a class="navbar-brand mr-5 pr-2" href="{% url 'admim-dashboard' %}" style= 'background:none;box-shadow:none;'>BinBlogger</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">
+                <span data-feather="globe"></span>
+                 View Site</a>
+            </li>
+            <li class="px-lg-2 nav-item {% if view_url == 'admim-dashboard' %}active{% endif %}">
+              <a class="nav-link" href='{% url 'admim-dashboard' %}' >{% if view_url == 'admim-dashboard' %}
+                <span data-feather="home"></span>
+              DASHBOARD 
+              {% else %}
+                <span data-feather="home"></span>
+              Dashboard{% endif %}</a>
+            </li>
+            <li class="nav-item {% if view_url == 'dashboard_posts' %}active{% endif %}">
+              <a class="nav-link" href='{% url "dashboard_posts" %}' >{% if view_url == 'dashboard_posts' %}
+                <span data-feather="book-open"></span>
+                ALL POSTS
+               {% else %}
+                <span data-feather="book-open"></span>
+               All Posts{% endif %}</a>
+            </li>
+          </ul>
+
+          <div class="navbar-nav">
+            <div class="nav-item dropdown">
+              <a class=" nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+                <span data-feather="smile"></span>
+                Profile
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something</a>
+              </div>
+
+            </div>
           </div>
         </div>
+      </div>
+      </div>
     </nav>
-  </header>
+{% endif %}
+{% endwith %}

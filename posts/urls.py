@@ -7,7 +7,8 @@ from .views import (BlogPageView,
                     PostDetailView, 
                     Posts_in_CategoryView,
                     TagPostsView,
-                    UserPostsView
+                    UserPostsView,
+                    AddCategoryView,
                     )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     path("post/<int:pk>/", PostDetailView.as_view(), name="post-detail"),
     path("category/<int:id>/posts", Posts_in_CategoryView, name="posts_in_category"),
     path("tags/<str:tag>/posts", TagPostsView, name="tag_posts"),
-    path("<str:username>/posts", UserPostsView , name="user_posts")
+    path("<str:username>/posts", UserPostsView , name="user_posts"),
+    path("category/add", AddCategoryView.as_view() , name="add_category"),
 
 ]

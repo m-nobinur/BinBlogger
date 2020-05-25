@@ -9,16 +9,19 @@ from posts.models import Post, Category
 
 
 # function for generating tags
-def gen_tags(post_list, num):
+def gen_tags(post_list, num=3):
     '''
     this fucntion will take a post list and return {num} amount tags
     takes two arguments: post_list and amount top tags to return
     '''
-
     all_tag_list = [ post.tags.split() for post in post_list ]
     tags = set([ tag for tags in all_tag_list for tag in tags ])
-
-    return list(tags)[:num]
+    
+    if len(tags) >= num:    
+        return list(tags)[:num]
+    else: 
+        return list(tags)
+    
 
 # function for generating top categories
 def gen_top_categories(cat_list, num):
@@ -28,13 +31,19 @@ def gen_top_categories(cat_list, num):
 
     takes two arguments: category_list and amount top categories to return
     '''
-
     top_categories = []
-    sorted_category = sorted([len(category.post_set.all()) for category in cat_list])[-num:]
-    for category in cat_list:
-        # get top 3 categories by sorting post_set for each category
-        if len(category.post_set.all()) in sorted_category:
-            top_categories.append(category)
+    sorted_category = sorted([len(category.post_set.all()) for category in cat_list])
+    if len(cat_list) >= num:
+        for category in cat_list:
+            # get top 3 categories by sorting post_set for each category
+            if len(category.post_set.all()) in sorted_category[-num:]:
+                top_categories.append(category)
+            else:
+                for category in cat_list:
+                    # get top 3 categories by sorting post_set for each category
+                    if len(category.post_set.all()) in sorted_category[-len(cat_list):]:
+                        top_categories.append(category)
+                
 
     return top_categories
 
@@ -46,7 +55,7 @@ def gen_top_categories(cat_list, num):
 class HomePageView(View):
 
     def get(self, request, *args, **kargs):
-        featured_posts = Post.objects.filter(featured=True).order_by('-created_on')
+        featured_posts = Post.objects.filter(featured=True).order_by('-updated_on')
 
         if featured_posts:
             featured_post = featured_posts[0]

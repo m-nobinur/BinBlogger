@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'posts.apps.PostsConfig',
     'profiles.apps.ProfilesConfig',
+    'admin_dashboard.apps.AdminDashboardConfig',
 
 ]
 
@@ -153,7 +154,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_FORMS = {'signup': 'profiles.forms.SignUpForm',}
-
+LOGIN_REDIRECT_URL = 'home'
 #crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

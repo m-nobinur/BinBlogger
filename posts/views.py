@@ -8,6 +8,7 @@ from django.views.generic import ( ListView,
                                    CreateView,
                                    UpdateView,
                                    DeleteView,
+                                   View,
                                    )
 
 from hitcount.views import HitCountDetailView
@@ -147,6 +148,25 @@ def Posts_in_CategoryView(request, id):
 
     return render(request, 'blog/posts_in_category.html', context)
 
+# this view will add a category if it doesn't exist
+class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
+    
+    def post(self, request, *args, **kwargs):
+        category = request.POST['category']
+ 
+        categories = Category.objects.all()
+        if category and category.lower() not in [ cat.category.lower() for cat in categories]:
+            cat = Category.objects.create(category = category)
+            cat.save()
+            return redirect('admim-dashboard')
+        else:
+            return redirect('admim-dashboard')
+              
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+    
 
 # view for blog/tag_posts.html
 def TagPostsView(request, tag):

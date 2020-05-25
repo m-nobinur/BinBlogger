@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+<div class="container">
+     <div class="card text-center mt-3" style='top:10rem;'>
+    <div class="card-header">
+        Update Category
+    </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="card-body">
+            <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                {{form.category|as_crispy_field}}
+            </div>
+            <div class="col-4"></div>
+            </div>
+        <a href="{% url 'admim-dashboard' %}" class="btn btn-outline-info">Cancle</a>
+        <button type='submit' class="btn btn-info">Update</button>
+    </div>
+    </form>
+    </div>
+</div>
+<script>
+    document.querySelector('.requiredField').innerText = ''
+</script>

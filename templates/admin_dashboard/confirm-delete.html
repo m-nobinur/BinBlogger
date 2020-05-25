@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+<div class="container">
+     <div class="card text-center mt-3" style='top:10rem;'>
+    <div class="card-header">
+        Delete Confirmation
+    </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="card-body">
+        <h5 class="card-title">Do you want to delete</h5>
+        {%if request.resolver_match.url_name == 'delete_by_admin'%}
+            <p class="card-text">"{{post.title|capfirst}}" this post?</p>
+        {% else %}
+            <p class="card-text">"{{object.category|capfirst}}" this Category?</p>
+        {% endif %}
+        <a href="{% url 'admim-dashboard' %}" class="btn btn-outline-info">Cancle</a>
+        <button type='submit' class="btn btn-danger">Confirm</button>
+    </div>
+    </form>
+    </div>
+</div>

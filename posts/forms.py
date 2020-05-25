@@ -10,3 +10,4 @@ class PostForm(forms.ModelForm):
         fields = [ 'title', 'post_thumbnail', 'tags', 
                   'content', 'categories', 'author',
                   'status' ]
+        

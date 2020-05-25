@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('blog/', include('posts.urls')),
     path('profile/', include('profiles.urls')),
+    path("binblogger-admin/", include('admin_dashboard.urls')),
 
 ]
 

@@ -57,11 +57,6 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_on']
 
-    # previous_post = models.ForeignKey(
-    #     'self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
-    # next_post = models.ForeignKey(
-    #     'self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
-
     def __str__(self):
         return self.title
 
@@ -76,16 +71,6 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'pk': self.pk
         })
-
-    # def get_update_url(self):
-    #     return reverse('post-update', kwargs={
-    #         'pk': self.pk
-    #     })
-
-    # def get_delete_url(self):
-    #     return reverse('post-delete', kwargs={
-    #         'pk': self.pk
-    #     })
 
     # @property
     # def get_comments(self):
