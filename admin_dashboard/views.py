@@ -174,7 +174,7 @@ def make_the_post_featured(request, pk):
         post.save()
         return redirect('admim-dashboard')
 
- #  admin dashboard selected categories's posts view   
+#  admin dashboard selected categories's posts view   
 @login_required
 @user_passes_test(super_user_check)
 def admin_dashboard_filter_category_posts_view(request, pk):

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}My Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <main role="main" class="ml-sm-auto col-lg-12 pt-4 pb-4 px-4"
+            style='background:#f9fff5;box-shadow: 0px 12px 20px 0px #ffa2b352;margin-bottom: 30px;'>
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-4 mb-3 border-bottom p-2">
+                <h1 class="h2">My Dashboard</h1>
+                <div class="btn-toolbar mb-4 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <input id='myInput' class="form-control form-control w-100" type="text" placeholder="Search"
+                            aria-label="Search">
+                    </div>
+                </div>
+            </div>
+            <main role="main" class="container">
+                <div class="row" id='main-area'>
+                    <!--posts section-->
+                    <div class="col-lg-8 p-0">
+                        <div class="my-3 p-3 bg-white rounded box-shadow">
+                            <div
+                                class="d-flex justify-content-between align-items-center w-100 border-bottom border-gray">
+                                {% if request.resolver_match.url_name == 'user_dashboard' %}
+                                    <h6 class="pb-2 mb-0">My Posts</h6>
+                                {% elif request.resolver_match.url_name == 'ud_category_posts' %}
+                                    <h6 class="pb-2 mb-0">Category: {{category|capfirst}}/Posts</h6>
+                                {% elif request.resolver_match.url_name == 'ud_tag_posts' %}
+                                    <h6 class="pb-2 mb-0">Tag: {{tag|lower|capfirst}}/Posts</h6>
+                                {% endif %}
+                                <a href="{% url 'add_post' %}" class='badge badge-dark mb-1' style='padding:7px;'>
+                                    <i class="fas fa-plus" style='color:#60e22c;height: 12px;width: 15px;'></i>
+                                    Add Post
+                                </a>
+                            </div>
+                            {% for post in posts %}
+                            <div class="media text-muted pt-3">
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-5">
+                                    <a href={{post.get_absolute_url}}
+                                        style="list-style:none;text-decoration:none;color:#6c757c;">
+                                        <strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}
+                                        </strong>
+                                    </a>
+                                    {{ post.content|truncatechars:120|striptags }}
+                                </p>
+                                <div>
+                                    <a href="{% url 'update_post' pk=post.pk %}" type="button"
+                                        style="text-decoration:none;" data-toggle="tooltip" data-placement="top"
+                                        title="click to edit">
+                                        <i class="far fa-edit" style='color:purple'></i>
+                                    </a>
+                                    <a href='{% url "delete_by_author" pk=post.pk %}' style="text-decoration:none;"
+                                        data-toggle="tooltip" data-placement="bottom" title="click to delete">
+                                        <i class="far fa-trash-alt p-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-0">
+                        <!--categories section-->
+                        <div class="my-3 p-3 bg-white rounded box-shadow ml-lg-3 p-4">
+                            <div
+                                class="d-flex justify-content-between align-items-center w-100 border-bottom border-gray pb-3 mb-2">
+                                <h6 class="pb-2 mb-0">Categories</h6>
+                            </div>
+                            {% for cat, post_count in cat_tup_list %}
+                            <div class="media text-muted pt-3">
+                                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <a href='{% url 'ud_category_posts' pk=cat.pk %}'
+                                            style="list-style:none;text-decoration:none;color:#6c757c;!important">
+                                            <strong class="text-gray-dark">{{ cat.category|capfirst }}
+                                            </strong>
+                                        </a>
+                                        <a href="{% url 'ud_category_posts' pk=cat.pk %}"
+                                            style='list-style:none;text-decoration:none;color:gray;!important'>View
+                                            Posts</a>
+                                    </div>
+                                    <span class="badge badge-pill badge-info"> 📖 {{ post_count }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!--tags section-->
+                        <div class="my-3 p-3 bg-white rounded box-shadow ml-lg-3 p-4">
+                            <h6 class="border-bottom border-gray pb-2 mb-0">Tags</h6>
+                            {% for tag, tag_postscount in tag_tup_list %}
+                            <div class="media text-muted pt-3">
+                                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <a href='{% url 'ud_tag_posts' tag=tag %}'
+                                            style="list-style:none;text-decoration:none;color:#6c757c;!important">
+                                            <strong class="text-gray-dark">{{ tag|lower|capfirst }}</strong>
+                                        </a>
+                                        <a href="{% url 'ud_tag_posts' tag=tag %}"
+                                            style='list-style:none;text-decoration:none;color:gray;!important'>View
+                                            Posts</a>
+                                    </div>
+                                    <span class="badge badge-pill badge-info"> {{tag_postscount}} 📖 </span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </main>
+    </div>
+</div>
+{% endblock content %}

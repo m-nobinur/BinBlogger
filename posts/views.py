@@ -120,9 +120,11 @@ def UserPostsView(request, username):
     paginator = Paginator(posts, 8) # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    posts_count = posts.count()
     
     context = {
         'author_user': user,
+        'posts_count':posts_count,
         'page_obj': page_obj,
     }
 

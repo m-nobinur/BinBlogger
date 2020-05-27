@@ -1,7 +1,7 @@
 {% load static %}
 
 {% with request.resolver_match.url_name as view_url %}
-{% if view_url != 'admim-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
+{% if view_url == 'home' or view_url == 'blog' or view_url == 'post-detail' %}
     <!-- Newsletter Section-->
     <section class='pb-5'>
       <div class="container pb-4">
@@ -74,8 +74,9 @@
         </div>
       </div>
     </section>
-
-      <!--footer label-->
+{% endif %}
+{% if view_url != 'admim-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
+    <!--footer label-->
     <footer class="py-4" style="background: #111">
       <div class="container text-center">
         <div class="row align-items-center">
@@ -141,7 +142,7 @@
 {% endwith %}
 
 {% with request.resolver_match.url_name as view_url %}
-{% if view_url == 'admim-dashboard' or view_url == 'dashboard_posts' or view_url == 'dashboard_tags' or view_url == 'dashboard_users' or view_url == 'dashboard_categories' or view_url == 'dashboard_category_posts' or view_url == 'dashboard_tag_posts' or view_url == 'dashboard_user_posts' %}
+{% if view_url == 'admim-dashboard' or view_url == 'dashboard_posts' or view_url == 'dashboard_tags' or view_url == 'dashboard_users' or view_url == 'dashboard_categories' or view_url == 'dashboard_category_posts' or view_url == 'dashboard_tag_posts' or view_url == 'dashboard_user_posts' or view_url == 'user_dashboard' or view_url == 'ud_category_posts' or view_url == 'ud_tag_posts' %}
       <script>
         $(document).ready(function () {
           $("#myInput").on("keyup", function () {
