@@ -30,7 +30,7 @@ POST_STATUS = (
     (0,"Draft"),
     (1,"Publish")
     )
-only_aphabets =  RegexValidator(r'^[ a-zA-Z]*$', 'Only space separate English letters are allowed.')
+only_aphabets =  RegexValidator(r'^[, a-zA-Z]*$', 'Enter comma separated tags. (use space for two words tag)')
 
 class Post(models.Model):
 
@@ -41,7 +41,7 @@ class Post(models.Model):
     # blog-specific field
     title = models.CharField(max_length=100)
     post_thumbnail = models.ImageField(upload_to='posts_image', default ='default.jpg')
-    tags = models.CharField(max_length=40, blank=True, validators=[only_aphabets])
+    tags = models.CharField(max_length=60, blank=True, validators=[only_aphabets])
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
     content = tinymce_models.HTMLField()

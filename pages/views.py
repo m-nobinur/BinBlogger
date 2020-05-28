@@ -19,8 +19,8 @@ def gen_tags(post_list, num=3):
     this fucntion will take a post list and return {num} amount tags. 
     takes two arguments: 1.post_list and 2.amount tags to generate
     '''
-    all_tag_list = [ post.tags.split() for post in post_list ]
-    tags = set([ tag for tags in all_tag_list for tag in tags ])
+    all_tag_list = [ post.tags.split(',') for post in post_list ]
+    tags = set([ tag.strip() for tags in all_tag_list for tag in tags ])
     
     if len(tags) >= num:    
         return list(tags)[:num]
