@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'profiles.apps.ProfilesConfig',
     'admin_dashboard.apps.AdminDashboardConfig',
+    'comments.apps.CommentsConfig',
 
 ]
 

@@ -25,7 +25,12 @@ class AdminDbView(LoginRequiredMixin, UserPassesTestMixin, View):
         admins = users.filter(is_superuser=True).order_by('date_joined')
         lead_admin = admins[0]    
         posts = Post.objects.all().order_by('-created_on')
-        featured_post = Post.objects.filter(featured=True).order_by('-updated_on')[0]
+        featured_posts = posts.filter(featured=True).order_by('-updated_on')
+        if featured_posts:
+            featured_post = featured_posts[0]
+        else:
+            featured_post = None
+            
         categories = Category.objects.all()[:10]
         tags = gen_tags(posts, 15)
         
@@ -112,7 +117,12 @@ class ADashAllPostsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        featured_post = Post.objects.filter(featured=True).order_by('-updated_on')[0]
+        featured_posts = Post.objects.filter(featured=True).order_by('-updated_on')
+        if featured_posts:
+            featured_post = featured_posts[0]
+        else:
+            featured_post = None
+
         context["featured_post"] = featured_post
         return context
     
@@ -184,9 +194,14 @@ def admin_dashboard_filter_category_posts_view(request, pk):
     categories = Category.objects.all()[:10]
     category = get_object_or_404(Category, pk= pk)
     cat_posts = category.post_set.all()
+ 
     if len(cat_posts) > 0:
         posts = cat_posts
-        featured_post = posts.filter(featured=True).order_by('-updated_on')[0]
+        featured_posts = posts.filter(featured=True).order_by('-updated_on')
+        if featured_posts:
+            featured_post = featured_posts[0]
+        else:
+            featured_post = None
     else:
         posts = None
         featured_post = None
@@ -214,11 +229,16 @@ def admin_dashboard_filter_category_posts_view(request, pk):
 def admin_dashboard_filter_tag_posts_view(request, tag):
     all_posts = Post.objects.all()
     posts = Post.objects.filter(tags__icontains=tag).all()
-    featured_post = posts.filter(featured=True).order_by('-updated_on')[0]
     users = User.objects.all().order_by('date_joined')
     categories = Category.objects.all()[:10]
     tags = gen_tags(all_posts, 15)
     
+    featured_posts = posts.filter(featured=True).order_by('-updated_on')
+    if featured_posts:
+        featured_post = featured_posts[0]
+    else:
+        featured_post = None
+   
     tag_tup_list = []
     for tag in tags:
         tag_postscount = Post.objects.filter(tags__icontains=tag).all()
@@ -243,11 +263,16 @@ def admin_dashboard_filter_tag_posts_view(request, tag):
 def admin_dashboard_filter_user_posts_view(request, username):
     all_posts = Post.objects.all()
     posts = Post.objects.filter(author__username=username)
-    featured_post = Post.objects.filter(featured=True).order_by('-updated_on')[0]
     users = User.objects.all().order_by('date_joined')
     categories = Category.objects.all()[:10]
-    tags = gen_tags(all_posts, 15)
     
+    featured_posts = posts.filter(featured=True).order_by('-updated_on')
+    if featured_posts:
+        featured_post = featured_posts[0]
+    else:
+        featured_post = None
+    
+    tags = gen_tags(all_posts, 15)
     tag_tup_list = []
     for tag in tags:
         tag_postscount = Post.objects.filter(tags__icontains=tag).all()

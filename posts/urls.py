@@ -1,5 +1,6 @@
 from django.urls import path
 
+from comments.views import add_comment, reply_comment
 from .views import (BlogPageView, 
                     PostCreateView,
                     PostUpdateView,
@@ -21,5 +22,6 @@ urlpatterns = [
     path("tags/<str:tag>/posts", TagPostsView, name="tag_posts"),
     path("<str:username>/posts", UserPostsView , name="user_posts"),
     path("category/add", AddCategoryView.as_view() , name="add_category"),
-
+    path("post/<int:pk>/comment/add", add_comment, name="add_comment"),
+    path("post/<int:ppk>/comment/<int:cpk>/reply", reply_comment, name="reply_comment"),
 ]

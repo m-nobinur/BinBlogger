@@ -72,14 +72,11 @@ class Post(models.Model):
             'pk': self.pk
         })
 
-    # @property
-    # def get_comments(self):
-    #     return self.comments.all().order_by('-timestamp')
+    @property
+    def get_all_comments(self):
+        return self.comments.all().order_by('-comment_time')
+   
+    @property
+    def get_comments_count(self):
+        return self.comments.all().count()
 
-    # @property
-    # def comment_count(self):
-    #     return Comment.objects.filter(post=self).count()
-
-    # @property
-    # def view_count(self):
-    #     return PostView.objects.filter(post=self).count()

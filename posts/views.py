@@ -102,7 +102,7 @@ class PostDetailView(HitCountDetailView):
         this_post = Post.objects.filter(id=self.object.id)
         latest_posts = Post.objects.order_by('-created_on')[0:3]
         popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
-        tags = this_post[0].tags.split()
+        tags = [tag.strip() for tag in this_post[0].tags.split(',')]
 
         context["latest_posts"] = latest_posts
         context["popular_posts"] = popular_posts
@@ -153,6 +153,11 @@ def Posts_in_CategoryView(request, id):
 # this view will add a category if it doesn't exist
 class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
     
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+    
     def post(self, request, *args, **kwargs):
         category = request.POST['category']
  
@@ -162,12 +167,8 @@ class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
             cat.save()
             return redirect('admim-dashboard')
         else:
-            return redirect('admim-dashboard')
-              
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        return False
+            return redirect('admim-dashboard')  
+    
     
 
 # view for blog/tag_posts.html

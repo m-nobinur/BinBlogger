@@ -68,39 +68,43 @@
                 </div>
               </div>
             </form> -->
-            <!-- Post comments
-            <h3 class="h4 mb-4">Comments</h3>
-            <ul class="list-unstyled comments">
+            <!-- Post comments -->
+            <h3 class="h4 mb-4">Comments {{post.get_comments_count}} </h3>
+            <form action="{% url 'add_comment' pk=post.pk%}" method="post" class = 'mx-4  pr-5'>
+                {% csrf_token %}
+                <b>Add comment: </b><textarea type="textarea" name='post-comment' placeholder='Comment to the post' class= 'mr-3 my-2 form-control'></textarea>
+                <button type='submit' style='float:right'>comment</button>
+            </form>
+            <ul class="list-unstyled comments mt-4">
+              {% for comment  in post.get_all_comments %}
               <li>
-                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-1.jpg" alt="" width="60">
+                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="{{comment.author.profile.image.url}}" alt="" width="60">
                   <div class="media-body ml-3">
-                    <p class="small mb-0 text-primary">15 Aug 2019</p>
-                    <h5>Jimmy Roy</h5>
-                    <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                    <p class="small mb-0 text-primary">{{comment.comment_time}}</p>
+                    <h5>{{ comment.author.first_name }} {{ comment.author.last_name }} </h5>
+                    <p class="text-muted text-small mb-2">{{ comment.comment_content }}</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                    <form action="{% url 'reply_comment' ppk=post.pk cpk=comment.pk %}" method="post" class='mr-5 pr-5'>
+                          {% csrf_token %}
+                          <input class = 'form-control' name='reply_content' type="text" placeholder='Reply to the comment'>
+                    </form>
                   </div>
                 </div>
                 <ul class="list-unstyled ml-5">
+                  {% for reply in comment.get_all_reply %}
                   <li> 
-                    <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-2.jpg" alt="" width="60">
+                    <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="{{reply.author.profile.image.url}}" alt="" width="60">
                       <div class="media-body ml-3">
-                        <p class="small mb-0 text-primary">19 Sep 2019</p>
-                        <h5>Melissa Johanson</h5>
-                        <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                        <p class="small mb-0 text-primary">{{reply.reply_time}}</p>
+                        <h5>{{ reply.author.first_name }} {{ reply.author.last_name }}</h5>
+                        <p class="text-muted text-small mb-2">{{reply.reply_content}}</p>
                       </div>
                     </div>
                   </li>
+                  {% endfor %}
                 </ul>
               </li>
-              <li>
-                <div class="media mb-4"><img class="rounded-circle shadow-sm img-fluid" src="img/person-3.jpg" alt="" width="60">
-                  <div class="media-body ml-3">
-                    <p class="small mb-0 text-primary">10 Oct 2019</p>
-                    <h5>David Nguyen</h5>
-                    <p class="text-muted text-small mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-small" href="#"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
-                  </div>
-                </div>
-              </li>
-            </ul> -->
+              {% endfor %}
+            </ul>
 
           </div>
           <div class="col-lg-1"></div>

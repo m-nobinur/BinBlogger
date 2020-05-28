@@ -29,7 +29,7 @@ def gen_tags(post_list, num=3):
     
 
 # function for generating top categories
-def gen_top_categories(cat_list, num):
+def gen_top_categories(cat_list, num:int):
     '''
     this fucntion will take a categories list and returns only
     top {nums} amount categories(contining max posts) 
@@ -37,36 +37,45 @@ def gen_top_categories(cat_list, num):
     takes two arguments: category_list and amount top categories to return
     '''
     top_categories = []
-    sorted_category = sorted([len(category.post_set.all()) for category in cat_list])
-    if len(cat_list) >= num:
+    sorted_category = sorted([len(category.post_set.all()) for category in cat_list])[::-1]
+    top_three = sorted_category[:3]
+    
+    if num > 3:
         for category in cat_list:
-            # get top 3 categories by sorting post_set for each category
-            if len(category.post_set.all()) in sorted_category[-num:]:
+            if len(category.post_set.all()) in sorted_category:
                 top_categories.append(category)
             else:
-                for category in cat_list:
-                    # get top 3 categories by sorting post_set for each category
-                    if len(category.post_set.all()) in sorted_category[-len(cat_list):]:
-                        top_categories.append(category)
-                
+                continue
+        top_categories = top_categories[:num]
+    else:
+        for category in cat_list:
+            # get top 3 categories by sorting post_set for each category
+            if len(category.post_set.all()) in top_three:
+                top_categories.append(category)
+            else:
+                continue 
+        top_categories = top_categories[:3]    
     return top_categories
 
 # view for index page and home page
 class HomePageView(View):
 
     def get(self, request, *args, **kargs):
-        featured_posts = Post.objects.filter(featured=True).order_by('-updated_on')
-
-        if featured_posts:
-            featured_post = featured_posts[0]
-
+        
         #  latest post will be deleted later    
         latest_post = Post.objects.order_by('-created_on')[0:3]
         popular_post = Post.objects.order_by('-hit_count__hits')[:6]
-        posts = Post.objects.all()
         categories = Category.objects.all()
+        
+        posts = Post.objects.all()
+        featured_posts = posts.filter(featured=True).order_by('-updated_on')
+        if featured_posts:
+            featured_post = featured_posts[0]
+        else:
+            featured_post = posts[len(posts)-1]
 
         top3_categories = gen_top_categories(categories, 3)
+        print('top three cat  ', top3_categories)
         tags = gen_tags(posts, 10)
 
         context = {
