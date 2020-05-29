@@ -20,6 +20,7 @@ def Profile_Update(request):
             user_form.save()
             profile_form.save()
             
+            messages.success(request, 'Profile Updated')  
             return redirect('profile_update')
     
     else:

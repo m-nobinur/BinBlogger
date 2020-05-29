@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, DeleteView, ListView, UpdateView
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import get_user_model
 
 from posts.models import Post, Category
@@ -132,10 +134,11 @@ class ADashAllPostsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return False
       
 # post that will be deleted from admin dashboard -view
-class DeletePostbyAdminView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeletePostbyAdminView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'admin_dashboard/confirm-delete.html'
     success_url = '/binblogger-admin/dashboard/'
+    success_message = 'Deleted'
     
     def test_func(self):
         if self.request.user.is_superuser:
@@ -144,10 +147,11 @@ class DeletePostbyAdminView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
 
 
 # category that will be deleted from admin dashboard - view
-class DeleteCategorybyAdmin(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteCategorybyAdmin(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Category
     template_name = 'admin_dashboard/confirm-delete.html'
     success_url = '/binblogger-admin/dashboard/'
+    success_message = 'Deleted'
     
     def test_func(self):
         if self.request.user.is_superuser:
@@ -155,11 +159,12 @@ class DeleteCategorybyAdmin(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
         return False
 
 # category update view on admin dashboard - view
-class UpdateCategorybyAdmin(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UpdateCategorybyAdmin(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Category
     fields = ['category']
     template_name = 'admin_dashboard/update-category.html'
     success_url = '/binblogger-admin/dashboard/'
+    success_message = 'Updated'
     
     def test_func(self):
         if self.request.user.is_superuser:
@@ -182,6 +187,7 @@ def make_the_post_featured(request, pk):
     if post:
         post.featured = True
         post.save()
+        messages.success(request, 'Featured successfully ') 
         return redirect('admin-dashboard')
 
 #  admin dashboard selected categories's posts view   
@@ -301,8 +307,11 @@ def make_user_as_admin(request, username):
         user.is_stuff = True
         user.is_superuser = True
         user.save()
+        messages.success(request, f'{user.username} is now admin') 
+        
         return redirect('admin-dashboard')
     else:
+        messages.error(request, 'Error occured !') 
         return redirect('admin-dashboard')
 
 #remove user as admin view 
@@ -318,8 +327,10 @@ def remove_user_admin_as_admin(request, username):
         user.is_superuser = False
         user.is_stuff = False
         user.save()
+        messages.success(request, f'{user.username} is removed as admin') 
         return redirect('admin-dashboard')
     else:
+        messages.error(request, 'Error occured !') 
         return redirect('admin-dashboard')
 
 #remove user from database view
@@ -334,8 +345,10 @@ def remove_user_from_db(request, pk):
         user = get_object_or_404(User, pk= pk)
         if user != lead_admin and user !=request.user:
             user.delete()
+            messages.success(request, f'{user.username} removed successfully') 
             return redirect('admin-dashboard')
         else:
+            messages.error(request, 'Error occured !') 
             return redirect('admin-dashboard')    
 
     return render(request, 'admin_dashboard/confirm-delete.html')

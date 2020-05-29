@@ -10,6 +10,30 @@
   <body>
 
     <div class="main-content">
+      {% if messages %}
+        {% for message in messages %}
+           {% if message.tags == 'success' %}
+              <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{message}} </strong> 
+              </div>
+              {% endif %}
+              {% if message.tags == 'error' %}
+              <div class="alert alert-danger animated alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray; background:red'>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{message}} </strong> 
+              </div>
+              {% endif %}
+              {% endfor %}
+              <script>
+                setTimeout(function(){
+                $('.alert' ).addClass("flipOutX");
+                setTimeout(function(){
+                  $('.alert' ).remove();
+                },1000);
+              }, 3000);
+              </script>
+        {% endif %}
       <!-- Header -->
       <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style="min-height:220px;background-size: cover; background-position: center top;">

@@ -120,10 +120,9 @@
 
 
 <!-- JavaScript files-->
-
-<!-- JQuery cdn-->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <!-- JQuery cdn-->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
 <!-- bootstrap cdn-->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -131,7 +130,6 @@
 
 <!-- lighbox cdn-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-
 {% with request.resolver_match.url_name as view_url %}
 <!--Don't break the line in if statement, this will cause error -->
 {% if view_url != 'admin-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}

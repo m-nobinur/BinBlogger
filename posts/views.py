@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, reverse
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ( ListView,    
                                    DetailView,
                                    CreateView,
@@ -43,7 +45,7 @@ class BlogPageView(ListView):
         return context
     
 # view for blog/add_post.html
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     
     model = Post
     template_name = "blog/add_post.html"
@@ -52,6 +54,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
                   'status', 'featured',
                  ]
     success_url = '/blog'
+    success_message = 'Post Created'
     
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -59,14 +62,15 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 # view for blog/update_post.html
-class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     
     model = Post
     template_name = "blog/update_post.html"
     fields = [ 'title', 'post_thumbnail', 'tags', 
                   'content', 'categories', 'featured',
                  ]
-    success_url = '/blog'
+    
+    success_message = 'Post Updated'
     
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -78,9 +82,10 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
             return True
         return False
 
-class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Post
     success_url = '/blog'
+    success_message = 'Post Deleted'
     
     def test_func(self):
         post = self.get_object()
@@ -165,8 +170,10 @@ class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
         if category and category.lower() not in [ cat.category.lower() for cat in categories]:
             cat = Category.objects.create(category = category)
             cat.save()
+            messages.success(request, f'{category} added as Category')  
             return redirect('admin-dashboard')
         else:
+            messages.error(request, f'{category} is already a Category')  
             return redirect('admin-dashboard')  
     
     

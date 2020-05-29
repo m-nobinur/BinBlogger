@@ -5,6 +5,29 @@
       <div class="container py-4">
         <div class="row text-center">
           <div class="col-lg-10 mx-auto">
+            {% if messages %}
+              {% for message in messages %}
+              {% if message.tags == 'error' %}
+              <div class="alert alert-danger animated alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray;z-index:1000'>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{message}} </strong> 
+              </div>
+              {% else %}
+                <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong> {{message}} </strong> 
+                </div>
+              {% endif %}
+              {% endfor %}
+              <script>
+                setTimeout(function(){
+                $('.alert' ).addClass("flipOutX");
+                setTimeout(function(){
+                  $('.alert' ).remove();
+                },1000);
+              }, 3000);
+              </script>
+            {% endif %}
             {% for cat in post.categories.all %}
               <a class="category-link mb-3 d-inline-block" href={{cat.get_absolute_url}}>{{cat}}</a>
             {% endfor %}
@@ -49,25 +72,6 @@
                 {% endfor %}
               </ul>
             </div>
-
-            <!-- Leave comment
-            <h3 class="h4 mb-4">Leave a comment</h3>
-            <form class="mb-5" action="#">
-              <div class="row">
-                <div class="form-group col-lg-6">
-                  <input class="form-control" type="text" name="name" placeholder="Full Name e.g. Jason Doe">
-                </div>
-                <div class="form-group col-lg-6">
-                  <input class="form-control" type="email" name="email" placeholder="Email Address e.g. Jason@email.com">
-                </div>
-                <div class="form-group col-lg-12">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Leave your message"></textarea>
-                </div>
-                <div class="form-group col-lg-12">
-                  <button class="btn btn-primary" type="submit">Submit your comment</button>
-                </div>
-              </div>
-            </form> -->
             <!-- Post comments -->
             <h3 class="h4 mb-4">Comments {{post.get_comments_count}} </h3>
             <form action="{% url 'add_comment' pk=post.pk%}" method="post" class = 'mx-4  pr-5'>
@@ -90,8 +94,8 @@
                     </p>
                     <h5>{{ comment.author.first_name }} {{ comment.author.last_name }} </h5>
                     <p class="text-muted text-small mb-2">{{ comment.comment_content }}</p>
-                    <a class="reset-anchor text-small" data-toggle="collapse" href="#collapseExample-{{comment.pk}}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
-                    <div class="collapse" id="collapseExample-{{comment.pk}}">
+                    <a class="reset-anchor text-small" data-toggle="collapse" href="#collapseComment-{{comment.pk}}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                    <div class="collapse" id="collapseComment-{{comment.pk}}">
                       <form action="{% url 'reply_comment' ppk=post.pk cpk=comment.pk %}" method="post" class='mr-5 pr-5'>
                             {% csrf_token %}
                             <input class = 'form-control mr-5' name='reply_content' type="text" placeholder='Reply to the comment'>
@@ -114,8 +118,8 @@
                         </p>
                         <h5>{{ reply.author.first_name }} {{ reply.author.last_name }}</h5>
                         <p class="text-muted text-small mb-2">{{reply.reply_content}}</p>
-                        <a class="reset-anchor text-small" data-toggle="collapse" href="#collapseExample-{{reply.pk}}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
-                        <div class="collapse" id="collapseExample-{{reply.pk}}">
+                        <a class="reset-anchor text-small" data-toggle="collapse" href="#collapseReply-{{reply.pk}}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-share mr-2 text-primary"></i><strong>Reply</strong></a>
+                        <div class="collapse" id="collapseReply-{{reply.pk}}">
                           <form action="{% url 'reply_comment' ppk=post.pk cpk=comment.pk %}" method="post" class='mr-5 pr-5'>
                                 {% csrf_token %}
                                 <input class = 'form-control mr-5' name='reply_content' type="text" placeholder='Reply to the comment'>
@@ -159,5 +163,4 @@
     </div>
   </div>
   <!-- end Modal -->
-
 {% endblock content %}

@@ -9,6 +9,7 @@
       {% include 'admin_dashboard/admin_sidebar.html' %}
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+   
       <!--dashboard label-->
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>
@@ -226,6 +227,29 @@
       </main>
     </div>
   </div>
+       {% if messages %}
+          {% for message in messages %}
+              {% if message.tags == 'error' %}
+              <div class="alert alert-danger animated alert-dismissible " role="alert" style='position: fixed;bottom: 18px;right: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{message}} </strong> 
+              </div>
+              {% else %}
+                <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;right: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong> {{message}} </strong> 
+                </div>
+              {% endif %}
+              {% endfor %}
+              <script>
+                setTimeout(function(){
+                $('.alert' ).addClass("flipOutX");
+                setTimeout(function(){
+                  $('.alert' ).remove();
+                },1000);
+              }, 3000);
+              </script>
+        {% endif %}
 
   <!-- Add Category Modal -->
   <div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="AddCategoryModalTitle" aria-hidden="true">

@@ -17,7 +17,7 @@
    
     <!-- Lightbox CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
-    
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
     {% with request.resolver_match.url_name as view_url %}
     <!--Don't break the line in if statement, this will cause error -->
     {% if view_url != 'admin-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
@@ -31,6 +31,7 @@
         <link href="{% static 'css/admin-site.css' %}" rel="stylesheet">
     {% endif %}
     {% endwith %}
-   
+
     <!-- Favicon-->
     {% comment %} <link rel="shortcut icon" href="img/favicon.png"> {% endcomment %}
+    

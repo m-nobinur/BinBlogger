@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.views.generic import( View,   
                                 TemplateView, 
                                 DeleteView,                            
@@ -136,10 +138,11 @@ class UserDashboard(LoginRequiredMixin, View):
         return render(request, 'user_dashboard/ud_index.html', context)
 
 # post that will be deleted by it's author-view
-class DeletePostbyAuthor(LoginRequiredMixin, DeleteView):
+class DeletePostbyAuthor(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'admin_dashboard/confirm-delete.html'
     success_url = '/mydashboard/'
+    success_message = 'Deleted'
 
 #  admin dashboard selected categories's posts view   
 @login_required
