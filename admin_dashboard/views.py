@@ -182,7 +182,7 @@ def make_the_post_featured(request, pk):
     if post:
         post.featured = True
         post.save()
-        return redirect('admim-dashboard')
+        return redirect('admin-dashboard')
 
 #  admin dashboard selected categories's posts view   
 @login_required
@@ -301,9 +301,9 @@ def make_user_as_admin(request, username):
         user.is_stuff = True
         user.is_superuser = True
         user.save()
-        return redirect('admim-dashboard')
+        return redirect('admin-dashboard')
     else:
-        return redirect('admim-dashboard')
+        return redirect('admin-dashboard')
 
 #remove user as admin view 
 @login_required
@@ -318,9 +318,9 @@ def remove_user_admin_as_admin(request, username):
         user.is_superuser = False
         user.is_stuff = False
         user.save()
-        return redirect('admim-dashboard')
+        return redirect('admin-dashboard')
     else:
-        return redirect('admim-dashboard')
+        return redirect('admin-dashboard')
 
 #remove user from database view
 @login_required
@@ -334,9 +334,9 @@ def remove_user_from_db(request, pk):
         user = get_object_or_404(User, pk= pk)
         if user != lead_admin and user !=request.user:
             user.delete()
-            return redirect('admim-dashboard')
+            return redirect('admin-dashboard')
         else:
-            return redirect('admim-dashboard')    
+            return redirect('admin-dashboard')    
 
     return render(request, 'admin_dashboard/confirm-delete.html')
         

@@ -12,7 +12,7 @@ from .views import (AdminDbView, DeletePostbyAdminView,
 
 urlpatterns = [
     # cbv
-    path("dashboard/", AdminDbView.as_view(), name="admim-dashboard"),
+    path("dashboard/", AdminDbView.as_view(), name="admin-dashboard"),
     path("post/<int:pk>/delete", DeletePostbyAdminView.as_view(), name="delete_by_admin"),
     path("dashboard/categories/", ADashAllCategoryView.as_view(), name="dashboard_categories"),
     path("dashboard/tags/", ADashAllTagView.as_view(), name="dashboard_tags"),

@@ -17,7 +17,7 @@ class Comment(models.Model):
     
     @property
     def get_all_reply(self):
-        return self.replies.all().order_by('-reply_time')
+        return self.replies.all().order_by('reply_time')
    
     @property
     def get_replies_count(self):

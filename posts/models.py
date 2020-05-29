@@ -74,7 +74,7 @@ class Post(models.Model):
 
     @property
     def get_all_comments(self):
-        return self.comments.all().order_by('-comment_time')
+        return self.comments.all().order_by('comment_time')
    
     @property
     def get_comments_count(self):

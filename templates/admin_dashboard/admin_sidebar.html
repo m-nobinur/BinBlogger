@@ -3,10 +3,10 @@
           <ul class="nav flex-column pt-3">
             
             <li class="nav-item">
-              <a class="nav-link {% if request.resolver_match.url_name == 'admim-dashboard' %}active {% endif %}" href="{% url 'admim-dashboard' %}">
+              <a class="nav-link {% if request.resolver_match.url_name == 'admin-dashboard' %}active {% endif %}" href="{% url 'admin-dashboard' %}">
                 <span data-feather="home"></span>
                 Dashboard 
-                {% if request.resolver_match.url_name == 'admim-dashboard' %}
+                {% if request.resolver_match.url_name == 'admin-dashboard' %}
                   <span class="sr-only">(current)</span>
                 {% endif %}
               </a>

@@ -165,9 +165,9 @@ class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
         if category and category.lower() not in [ cat.category.lower() for cat in categories]:
             cat = Category.objects.create(category = category)
             cat.save()
-            return redirect('admim-dashboard')
+            return redirect('admin-dashboard')
         else:
-            return redirect('admim-dashboard')  
+            return redirect('admin-dashboard')  
     
     
 

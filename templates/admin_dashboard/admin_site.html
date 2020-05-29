@@ -35,7 +35,7 @@
                 
                 <div class="d-flex justify-content-between align-items-center w-100 border-bottom border-gray">
                 {% with request.resolver_match.url_name as view_url %}
-                  {% if view_url == 'admim-dashboard' %}
+                  {% if view_url == 'admin-dashboard' %}
                     <h6 class="pb-2 mb-0">Blog Posts</h6>
                     <a href="{% url 'add_post' %}" class= 'badge badge-dark mb-1' style = 'padding:7px;'>
                     <span data-feather="plus-circle" style = 'color:#60e22c;height: 12px;width: 15px;'></span>
@@ -93,7 +93,7 @@
                 {% else %}
                   <h1 class='p-4 mt-3'> No posts 😥</h1>
                 {% endif %}
-                {% if request.resolver_match.url_name == 'admim-dashboard' %}
+                {% if request.resolver_match.url_name == 'admin-dashboard' %}
                   <small class="d-block text-right mt-3">
                     <a href="{% url 'dashboard_posts' %}">All Posts</a>
                   </small>

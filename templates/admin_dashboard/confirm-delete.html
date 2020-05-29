@@ -16,7 +16,7 @@
         {%if request.resolver_match.url_name == 'delete_by_author'%}
             <a href="{% url 'user_dashboard' %}" class="btn btn-outline-info">Cancle</a>
         {% else %}
-            <a href="{% url 'admim-dashboard' %}" class="btn btn-outline-info">Cancle</a>
+            <a href="{% url 'admin-dashboard' %}" class="btn btn-outline-info">Cancle</a>
         {% endif %}
         <button type='submit' class="btn btn-danger">Confirm</button>
     </div>

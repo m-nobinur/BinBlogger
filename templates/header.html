@@ -2,7 +2,7 @@
 
 {% with request.resolver_match.url_name as view_url %}
 <!--Don't break the line in if statement, this will cause error -->
-{% if view_url != 'admim-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
+{% if view_url != 'admin-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
 <!-- navbar-->
 <header class="header">
   <nav class="navbar navbar-expand-lg navbar-light py-4 index-forward bg-white">
@@ -66,7 +66,7 @@
               <a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a>
               {% endif %}
               {% if user.is_authenticated and user.is_superuser %}
-              <a class="dropdown-item" href="{% url 'admim-dashboard' %}"> Admin Panel</a>
+              <a class="dropdown-item" href="{% url 'admin-dashboard' %}"> Admin Panel</a>
               {% endif %}
               {% if user.is_authenticated %}
               <form method="post" action="{% url 'account_logout' %}">
@@ -90,7 +90,7 @@
 <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark flex-md-nowrap"
   style='background-color: #3c779a!important;'>
   <div class="container">
-    <a class="navbar-brand mr-5 pr-2" href="{% url 'admim-dashboard' %}"
+    <a class="navbar-brand mr-5 pr-2" href="{% url 'admin-dashboard' %}"
       style='background:none;box-shadow:none;'>BinBlogger</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,8 +104,8 @@
             View Site
           </a>
         </li>
-        <li class="px-lg-2 nav-item {% if view_url == 'admim-dashboard' %}active{% endif %}">
-          <a class="nav-link" href='{% url 'admim-dashboard' %}'>{% if view_url == 'admim-dashboard' %}
+        <li class="px-lg-2 nav-item {% if view_url == 'admin-dashboard' %}active{% endif %}">
+          <a class="nav-link" href='{% url 'admin-dashboard' %}'>{% if view_url == 'admin-dashboard' %}
             <span data-feather="home"></span>
             DASHBOARD
             {% else %}
