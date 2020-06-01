@@ -52,13 +52,14 @@
           <!-- Navbar link-->
           <li class="nav-item"><a class="nav-link {% if view_url == 'blog' %}active{% endif %}"
               href={% url 'blog' %}>Blog</a></li>
+          <li class="nav-item"><a class="nav-link {% if view_url == 'blog' %}active{% endif %}"
+              href={% url 'authors' %}>Authors</a></li>
           <!-- dropdown -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="pages" href="#" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">Account</a>
             <div class="dropdown-menu mt-2" aria-labelledby="account">
               {% if user.is_authenticated %}
-              <a class="dropdown-item" href="{% url 'add_post' %}">Add Post</a>
               <a class="dropdown-item" href="{% url 'profile_update' %}">Profile</a>
               <a class="dropdown-item" href="{% url 'user_dashboard' %}">Dashboard</a>
               {% else %}
@@ -81,6 +82,7 @@
             </div>
           </li>
         </ul>
+        <span class="nav-item"><a class="btn btn-outline-info btn-sm" href="{% url 'add_post' %}">Add Post</a></span>
       </div>
     </div>
   </nav>

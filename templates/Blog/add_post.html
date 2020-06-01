@@ -1,50 +1,98 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %}Add Post{% endblock title %}
 
 {% block content %}
-    <section class='pb-5'>
-        <div class="container pb-4">
-          <div class="p-4 bg-light">
-            <div class="row align-items-center p-lg-3">
-                <div class="container">
-                    <form enctype="multipart/form-data" method="post" style="padding-top: 3rem;padding-bottom:3rem;">
-                        {% csrf_token %}
-                        <div class='container'>
-                            <div class="form-row">
-                                <div class="form-group col-md-6 mb-0">
-                                    {{ form.title|as_crispy_field }}
-                                </div>
-                                <div class="form-group col-md-1 mb-0"></div>
-                                <div class="form-group col-md-4 mb-0">
-                                    {{ form.post_thumbnail|as_crispy_field }}
-                                </div>
-                            </div>
-                            {{ form.content|as_crispy_field }}
-                            <div class="form-row">
-                                <div class="form-group col-md-4 mb-0">
-                                    {{ form.categories|as_crispy_field }}
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4 mb-0">
-                                    {{ form.tags|as_crispy_field }}
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4 mb-0">
-                                    {{ form.status|as_crispy_field }}
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-info btn-lg " type="submit" style = 'font-family:Roboto;'>Post</button>
+    <div class="">
+    <form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-1 pt-lg-5 ml-lg-5 pt-sm-3">
+        </div>
+        <div class="col-md-7 pl-lg-4 pt-lg-5 ml-0 p-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-info">New Post</h4>
+                    <hr>
+                        <div class="form-group row">
+                            <label for="text" class="col-12 col-form-label">Post Title</label>
+                            <div class="col-12">
+                                {{ form.title|as_crispy_field }}
                             </div>
                         </div>
-                    </form>
+                        <div class="form-group row">
+                            <label for="textarea" class="col-12 col-form-label">Post Content (Visual Editor)</label>
+                            <hr class="mb-2">
+                            <div class="col-12">
+                                {{ form.content }}
+                            </div>
+                        </div>
                 </div>
-             </div>
-          </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header bg-light ">
+                    <button type="submit" class="btn btn-info btn-block">Publish</button>
+                </div>
+            </div>
         </div>
-    </section>
+        <div class="col-lg-3 d-block mx-auto pt-lg-5 p-sm-3">
+            <div class="card mb-3">
+                <div class="card-header bg-light ">
+                    <span class="mr-3">Categories</span>
+                    <button type="button" class="btn btn-info btn-sm ml-5 pl-2">Add New Category</button>
+                </div>
+                <div class="card-body">
+                        <div class="form-group text-center mt-4">
+                            {{form.categories|as_crispy_field}}
+                        </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header bg-light ">Tags</div>
+                <div class="card-body">
+                  
+                        <div class="form-group row">
+                            <div class="col-12">
+                                {{form.tags|as_crispy_field}}
+                            </div>
+                            <div class="col-12">
+                                <small>Seperate Tags with commas ( , )</small>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+            <div class="card mb-3">
+                <div class="card-header bg-light ">Featured Image</div>
+                <div class="card-body">
+                    <div class="picture-container">
+                        <div class="picture">
+                            <img src="{% static 'img/default_postthumb.jpg' %}" class="picture-src" id="wizardPicturePreview" title="">
+                            <i style='font-size:40px;bottom:10px' class="fas fa-camera"></i>
+                            {{ form.post_thumbnail }}
+                        </div>
+
+                        <div class="card-footer bg-light">
+                            <span>Set Featured Image</span>
+                        </div>
+
+                        <label for="id_image" class=" requiredField">
+                    </div>
+
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </form>
+</div>
+<script>
+    document.getElementById("id_title").setAttribute("placeholder", "Enter Title here");
+</script>
+                                                                       
 {% endblock content %}
+

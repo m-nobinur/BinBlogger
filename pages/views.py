@@ -12,6 +12,7 @@ from django.views.generic import( View,
                                 )
                               
 from posts.models import Post, Category
+from comments.models import Comment, Reply
 
 User = get_user_model()
 
@@ -74,7 +75,10 @@ class HomePageView(View):
         if featured_posts:
             featured_post = featured_posts[0]
         else:
-            featured_post = posts[len(posts)-1]
+            if posts:
+                featured_post = posts[len(posts)-1]
+            else:
+                featured_post = None
 
         top3_categories = gen_top_categories(categories, 3)
         print('top three cat  ', top3_categories)
@@ -90,6 +94,29 @@ class HomePageView(View):
         }
 
         return render(request, 'pages/home.html', context)
+
+# authors page view 
+class AuthorPageView(View):
+    
+    def get(self, request, *args, **kargs):
+        users = User.objects.all()
+        authors = []
+        for user in users:
+            user_posts = Post.objects.filter(author=user)
+            if user_posts.count() > 0 :
+                comments_count = Comment.objects.filter(author=user).count()
+                replies_count = Reply.objects.filter(author=user).count()
+                comments_count = int(comments_count) + int(replies_count)
+                post_counts = user_posts.count()
+                authors.append((user, post_counts, comments_count ))
+                
+        context = {
+            'authors': authors,
+            
+        }
+        
+        return render(request, 'pages/authors.html', context)
+        
 
 # search view for pages/search.html
 class SearchView(View):

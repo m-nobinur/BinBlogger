@@ -48,7 +48,7 @@
       <h2 class="h5 mb-3">Tags cloud</h2>
       <ul class="list-inline">
         {% for tag in tags %}
-            <li class="list-inline-item my-1 mr-2"><a class="sidebar-tag-link" href={% url 'tag_posts' tag=tag %}>{{ tag }}</a></li>
+            <li class="list-inline-item my-1 mr-2"><a class="sidebar-tag-link" href="{% url 'tag_posts' tag=tag %}">{{ tag }}</a></li>
         {% endfor %}
       </ul>
     </div>

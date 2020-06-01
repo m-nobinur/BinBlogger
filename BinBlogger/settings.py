@@ -1,13 +1,8 @@
-
 import os
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
@@ -17,9 +12,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # 3rd parties
-    'filebrowser',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -38,7 +30,7 @@ INSTALLED_APPS = [
     'hitcount',
     'debug_toolbar',
     'django_summernote',
-    # 'tinymce',
+    'easy_thumbnails',
 
     # local
     'pages.apps.PagesConfig',

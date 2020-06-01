@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
     <section class="py-5">
@@ -58,7 +59,8 @@
             </ul>
           </div>
         </div>
-        <img class="w-100 mb-5" src="{{post.post_thumbnail.url}}" alt="...">
+        
+        <img class="w-100 mb-5" src="{% thumbnail post.post_thumbnail 900x450 crop="-10,4" %}" alt="...">
         <div class="row">
           <div class="col-lg-1"></div>
           <div class="col-lg-10">
@@ -163,4 +165,5 @@
     </div>
   </div>
   <!-- end Modal -->
+  
 {% endblock content %}

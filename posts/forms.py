@@ -9,5 +9,5 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = [ 'title', 'post_thumbnail', 'tags', 
                   'content', 'categories', 'author',
-                  'status' ]
+                   ]
         

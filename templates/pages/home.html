@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %} BinBlogger {% endblock title %}
 
 {% block content %}
   <!-- Main post-->
+  {% if featured_post %}
   <section class="bg-white pb-5">
     <div class="container-fluid px-0 pnb-4">
       <div class="row align-items-center">
         <div class="col-lg-12">
           <div class="post-thumnail">
-            <img class="img-fluid w-100" style='height:540px' src={{featured_post.post_thumbnail.url}} alt="">
+            <img class="img-fluid w-100" style='height:480px' src={{featured_post.post_thumbnail.url}} alt="">
           </div>
         </div>
         <div class="col-lg-6 mx-auto text-center">
@@ -32,6 +34,7 @@
       </div>
     </div>
   </section>
+  {% endif %}
 
   <!-- Top categories-->
   <section class="pb-5">

@@ -15,6 +15,7 @@ from django.views.generic import ( ListView,
 
 from hitcount.views import HitCountDetailView
 
+from comments.models import Comment, Reply
 from .models import Category, Post
 from .forms import PostForm
 from pages.views import gen_tags
@@ -45,16 +46,15 @@ class BlogPageView(ListView):
         return context
     
 # view for blog/add_post.html
-class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     
     model = Post
     template_name = "blog/add_post.html"
     fields = [ 'title', 'post_thumbnail', 'tags', 
                   'content', 'categories',
-                  'status', 'featured',
+                  'featured',
                  ]
     success_url = '/blog'
-    success_message = 'Post Created'
     
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -120,16 +120,19 @@ class PostDetailView(HitCountDetailView):
 def UserPostsView(request, username):
     user = get_object_or_404(User, username= username)
     posts = Post.objects.filter(author=user).order_by('-created_on')
-    
     # pagination
     paginator = Paginator(posts, 8) # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     posts_count = posts.count()
+    comments_count = Comment.objects.filter(author=user).count()
+    replies_count = Reply.objects.filter(author=user).count()
+    total_user_comments = int(comments_count) + int(replies_count)
     
     context = {
         'author_user': user,
         'posts_count':posts_count,
+        'comments_count':total_user_comments,
         'page_obj': page_obj,
     }
 
