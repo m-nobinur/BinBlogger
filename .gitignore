@@ -4,10 +4,10 @@ db.sqlite3
 **/*.pyc
 **/__pycache__
 media/posts_image/*
-!media/posts_image/.gitkeep
-media/django-summernote/*
-!media/django-summernote/.gitkeep
 media/profile_pics/*
+media/django-summernote/*
+!media/posts_image/.gitkeep
+!media/django-summernote/.gitkeep
 !media/profile_pics/.gitkeep
 media/_versions
 media/*.jpg
