@@ -1,5 +1,0 @@
-{
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Path": "autopep8",
-    "pythonPreview.code.lineHeight": 1.4
-}
