@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <div class="picture-container">
                         <div class="picture">
-                            <img src="{% static 'img/default_postthumb.jpg' %}" class="picture-src" id="wizardPicturePreview" title="">
+                            <img src="{{ object.post_thumbnail.url }}" class="picture-src" id="wizardPicturePreview" title="">
                             <i style='font-size:40px;bottom:10px' class="fas fa-camera"></i>
                             {{ form.post_thumbnail }}
                         </div>

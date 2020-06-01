@@ -149,7 +149,7 @@ class UserDashboard(LoginRequiredMixin, View):
             user_post_count = cat.post_set.all().filter(author=request.user).count()
             cat_tup_list.append((cat, user_post_count))
         
-        tags = gen_tags(posts, 15)
+        tags = gen_tags(posts, 10)
         tag_tup_list = []
         for tag in tags:
             tag_posts = Post.objects.filter(tags__icontains=tag).all().filter(author=request.user)

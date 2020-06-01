@@ -62,9 +62,9 @@ class Post(models.Model):
     # preprossesing before save
     def save(self, *args, **kwargs):
         if not self.tags:
-            self.tags = 'blog,programming'.capitalize()
+            self.tags = 'blog,programming'.lower()
         else:
-            self.tags = self.tags.capitalize()
+            self.tags = self.tags.lower()
             
         super(Post, self).save(*args, **kwargs)
         
