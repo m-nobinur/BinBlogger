@@ -69,10 +69,10 @@
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     padding-bottom: 40px;
     letter-spacing: -2px;
     border-bottom: 1px solid #dbdbdb;
@@ -103,22 +103,24 @@ pre {
     padding: 10px;
     border: 1px solid rgb(67, 223, 197);
     border-radius: 5px;
-    color: rgb(240, 236, 27);
+    color: #34ead2;
 }
 
 
 blockquote {
     display: block;
     border-left: 4px solid #0ddfb2;
-    margin-left: -15px;
-    padding-left: 15px;
+    margin-left: 20px;
+    padding-left: 25px;
     font-style: italic;
-    color: rgb(101, 102, 102);
+    color: rgb(98, 100, 100);
+    background: #ececec;
 }
 
 mark {
-    background-color: yellow;
+    background-color: rgb(164, 255, 205);
     color: black;
+    border-radius: 2px;
 }
 
 #id_title {

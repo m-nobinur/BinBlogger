@@ -1,6 +1,7 @@
 django ==3.0.6
 django-allauth==0.41.0
 django-crispy-forms==1.9.0
+django-summernote==0.8.11.6
 django-debug-toolbar==2.2
 Pillow==7.1.2
 python-decouple==3.3

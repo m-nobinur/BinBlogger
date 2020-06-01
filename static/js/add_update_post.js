@@ -79,6 +79,6 @@ $(".selectmultiple").attr({
   "data-width": "fit",
   "data-style": "btn-outline-info",
   title: "Select categories...",
-  "data-selected-text-format": "count > 2",
+  "data-selected-text-format": "count > 3",
 });
 $("select").selectpicker();

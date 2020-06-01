@@ -25,7 +25,7 @@ class Category(models.Model):
         return self.category
     
     def save(self, *args, **kwargs):
-        if category:
+        if self.category:
             self.category = self.category.capitalize()
 
         super(Category, self).save(*args, **kwargs)
@@ -62,9 +62,9 @@ class Post(models.Model):
     # preprossesing before save
     def save(self, *args, **kwargs):
         if not self.tags:
-            self.tags = 'blog,programming'.upper()
+            self.tags = 'blog,programming'.capitalize()
         else:
-            self.tags = self.tags.upper()
+            self.tags = self.tags.capitalize()
             
         super(Post, self).save(*args, **kwargs)
         
