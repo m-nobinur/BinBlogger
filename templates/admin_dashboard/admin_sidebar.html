@@ -11,7 +11,25 @@
                 {% endif %}
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item border-bottom">
+              <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_users' %}active {% endif %}" href="{% url 'dashboard_users' %}">
+                <span data-feather="user"></span>
+                All Users
+                {% if request.resolver_match.url_name == 'dashboard_users' %}
+                  <span class="sr-only">(current)</span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item border-bottom">
+              <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_categories' %}active {% endif %}" href="{% url 'dashboard_categories' %}">
+                <span data-feather="book"></span>
+                All Categories
+                {% if request.resolver_match.url_name == 'dashboard_categories' %}
+                  <span class="sr-only">(current)</span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item border-bottom">
               <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_posts' %}active {% endif %}" href="{% url 'dashboard_posts' %}">
                 <span data-feather="book-open"></span>
                 All Posts
@@ -20,12 +38,16 @@
                 {% endif %}
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_tags' %}active {% endif %}" href="{% url 'dashboard_tags' %}">
+                <span data-feather="briefcase"></span>
+                All Tags
+                {% if request.resolver_match.url_name == 'dashboard_tags' %}
+                  <span class="sr-only">(current)</span>
+                {% endif %}
+              </a>
+            </li>
           </ul>
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-              <span data-feather="plus-circle"></span>
-            </a>
-          </h6>
+          
         </div>
       </nav>

@@ -41,7 +41,10 @@
             <div class="card mb-3">
                 <div class="card-header bg-light ">
                     <span class="mr-3">Categories</span>
-                    <button type="button" class="btn btn-info btn-sm ml-5 pl-2">Add New Category</button>
+                   <button type="button" class="badge badge-info ml-5 pl-2" style = 'padding:8px;border:none;outline:none;margin-left:4.2rem !important' data-toggle="modal" data-target="#AddCategoryModal">
+                        Add New Category
+                    </button>
+                    
                 </div>
                 <div class="card-body">
                         <div class="form-group text-center mt-4">
@@ -69,8 +72,7 @@
                 <div class="card-body">
                     <div class="picture-container">
                         <div class="picture">
-                            <img src="{% static 'img/default_postthumb.jpg' %}" class="picture-src" id="wizardPicturePreview" title="">
-                            <i style='font-size:40px;bottom:10px' class="fas fa-camera"></i>
+                            <img src="{% static 'img/post_default.jpg' %}" class="picture-src" id="wizardPicturePreview" title="">
                             {{ form.post_thumbnail }}
                         </div>
 
@@ -90,6 +92,29 @@
     </div>
     </form>
 </div>
+<!-- Add Category Modal -->
+  <div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="AddCategoryModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AddCategoryModalTitle">Add Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'add_category' %}" method="post">
+          {% csrf_token %}
+          <div class="modal-body">
+              <input type="text" name="category" class="form-control" id="category">
+              <input type="hidden" value="add_post_view" name="add_category" />
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">+ Add</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 <script>
     document.getElementById("id_title").setAttribute("placeholder", "Enter Title here");
 </script>

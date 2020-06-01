@@ -151,7 +151,7 @@ class DeleteCategorybyAdmin(SuccessMessageMixin, LoginRequiredMixin, UserPassesT
     model = Category
     template_name = 'admin_dashboard/confirm-delete.html'
     success_url = '/binblogger-admin/dashboard/'
-    success_message = 'Deleted'
+    success_message = 'Deleted Category Successfully'
     
     def test_func(self):
         if self.request.user.is_superuser:

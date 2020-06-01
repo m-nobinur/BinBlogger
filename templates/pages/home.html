@@ -37,26 +37,26 @@
   {% endif %}
 
   <!-- Top categories-->
-  <section class="pb-5">
+  <section class="pb-3">
     <div class="container pb-4">
       <div class="row mb-5 pb-4">
         {% for cat in top3_categories %}
           {% if forloop.counter == 1 %}
             <div class="col-lg-4 mb-4 mb-lg-0">
-              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-1.jpg' %}')" href={{cat.get_absolute_url}}>
+              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-1.jpg' %}')" href={{cat.get_absolute_url}}>
                 <span class="category-block-title">{{cat}}</span>
               </a>
             </div>
           {% endif %}
           {% if forloop.counter == 2 %}
             <div class="col-lg-4 mb-4 mb-lg-0">
-              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-2.jpg' %}')" href={{cat.get_absolute_url}}>
+              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-2.jpg' %}')" href={{cat.get_absolute_url}}>
                 <span class="category-block-title">{{ cat }}</span>
               </a>
             </div>
           {% endif %}
           {% if forloop.counter == 3 %}
-            <div class="col-lg-4"><a class="category-block bg-center bg-cover" style="background: url('{% static 'img/category-bg-3.jpg' %}')" href={{cat.get_absolute_url}}><span
+            <div class="col-lg-4"><a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-3.jpg' %}')" href={{cat.get_absolute_url}}><span
             class="category-block-title">{{cat}}</span></a></div>
           {% endif %}
         {% endfor %}
@@ -64,28 +64,6 @@
     </div>
   </section>
 
-  <!-- search Section-->
-  <section class='pb-2'>
-    <div class="container pb-2">
-      <div class="p-4 bg-dark" style = 'box-shadow: 0px 5px 12px 0px #00f3ffad;border-radius: 20px;'>
-        <div class="row align-items-center p-lg-3">
-          <div class="col-lg-3 mb-2 mb-lg-0">
-          </div>
-          <div class="col-lg-6">
-            <form action="{% url 'search' %}">
-              <div class="input-group">
-                <input style = 'border-radius:10px; font-family:roboto;' class="form-control" name ='q' type="search" placeholder="Search here......"
-                  aria-label="email address" aria-describedby="button-addon2">
-                <div class="input-group-append ml-2">
-                  <button class="btn btn-primary ml-2" style = 'border-radius:10px; font-family:roboto; 'id="button-addon2" type="submit">Search</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
     {% if messages %}
         {% for message in messages %}
               <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray;z-index:1000'>
@@ -104,7 +82,7 @@
     {% endif %}
 
   <!-- Blog listing-->
-  <section class="py-5">
+  <section class="pb-5 pt-1">
     <div class="container py-4">
       <div class="row">
         <div class="col-lg-9 mb-5 mb-lg-0">

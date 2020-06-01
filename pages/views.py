@@ -81,7 +81,6 @@ class HomePageView(View):
                 featured_post = None
 
         top3_categories = gen_top_categories(categories, 3)
-        print('top three cat  ', top3_categories)
         tags = gen_tags(posts, 10)
 
         context = {

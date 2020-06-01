@@ -27,53 +27,6 @@
   </div>
 </section>
 
-<!-- Instagram items-->
-<section>
-  <div class="instagram-section-title d-none d-sm-block">
-    <i class="fab fa-instagram mr-2"></i>
-    Follow me on Instagram @nobin_khan
-  </div>
-  <div class="container-fluid px-0">
-    <div class="row">
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-1.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-2.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-3.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-4.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-5.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-      <div class="col-lg-2 col-4 p-0">
-        <a class="d-block instagram-item" href="#">
-          <img class="img-fluid" src={% static 'img/instagram-6.jpg' %} alt="">
-          <div class="instagram-item-overlay"><i class="fab fa-instagram"></i></div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 {% endif %}
 <!--Don't break the line in if statement, this will cause error -->
 {% if view_url != 'admin-dashboard' and view_url != 'dashboard_posts' and view_url != 'dashboard_tags' and view_url != 'dashboard_users' and view_url != 'dashboard_categories' and view_url != 'dashboard_category_posts' and view_url != 'dashboard_tag_posts' and view_url != 'dashboard_user_posts' %}
@@ -82,33 +35,27 @@
   <div class="container text-center">
     <div class="row align-items-center">
       <div class="col-md-4 text-lg-left">
-        <img src="{% static 'img/logo-footer.svg' %}" alt="..." width="120">
+        <img src="{% static 'img/binblogger.png' %}" alt="BinBlogger Logo" width="200">
       </div>
 
       <div class="col-md-4 text-center">
         <div class="d-flex align-items-center flex-wrap justify-content-center">
-          <h6 class="text-muted mb-0 py-2 mr-3">Follow me<span class="ml-3">-</span></h6>
+          <h6 class="text-muted mb-0 py-2 mr-3">follow me<span class="ml-3">-</span></h6>
           <ul class="list-inline small mb-0 text-white">
-            <li class="list-inline-item"><a class="reset-anchor" href="#">
+             <li class="list-inline-item text-primary"><a class="reset-anchor" href="#">
                 <i class="fab fa-facebook-f"></i></a>
             </li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#">
-                <i class="fab fa-twitter"></i></a>
-            </li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#">
+             <li class="list-inline-item text-primary" text-primary><a class="reset-anchor" href="#">
                 <i class="fab fa-instagram"></i></a>
             </li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#">
+             <li class="list-inline-item text-primary"><a class="reset-anchor" href="#">
                 <i class="fab fa-linkedin"></i></a>
-            </li>
-            <li class="list-inline-item"><a class="reset-anchor" href="#">
-                <i class="fab fa-youtube"></i></a>
             </li>
           </ul>
         </div>
       </div>
       <div class="col-md-4 text-lg-right">
-        <p class="mb-0 text-muted text-small text-heading">copyright | <a href="#" class="text-reset">| Nobin Khan</a>
+        <p class="mb-0 text-muted text-small text-heading">@ copyright | <a href="#" class="text-reset">| Nobin Khan</a>
         </p>
       </div>
     </div>
@@ -126,6 +73,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!-- bootstrap cdn-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -143,7 +91,7 @@
   $(document).ready(function () {
     $("#myInput").on("keyup", function () {
       var value = $(this).val().toLowerCase();
-      $("#main-area *").filter(function () {
+      $("#main-area .media-body").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });

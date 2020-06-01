@@ -35,38 +35,45 @@
                 {% for post in posts %}
                 {% if post == featured_post %}
                   <div class="media text-muted pt-3">
-                      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-5">
-                        <a href={{post.get_absolute_url}} style="list-style:none;text-decoration:none;color:#6c757c;"><strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}</strong></a>
-                        {{ post.content|truncatechars:120|striptags }}
-                      </p>
-                      <div>
-                      <a href="{% url 'make_feature' pk=post.pk %}"  style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="feature the post">
-                        <span data-feather="award" style = 'color:#30e225;;list-style:none;text-decoration:none;width: 20px;height: 20px;'></span>
-                      </a>
-                      <a href="{% url 'update_post' pk=post.pk %}" type="button" style ="text-decoration:none;" data-toggle="tooltip" data-placement="top" title="click to edit">
-                        <span data-feather="edit" style = 'color:purple;'></span>
-                      </a>
-                      <a href='{% url "delete_by_admin" pk=post.pk %}' style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="click to delete">
-                        <span data-feather="trash-2" style = 'color:red;'></span>
-                      </a>
+                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-2 query-class">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                        <a href={{post.get_absolute_url}} style="list-style:none;text-decoration:none;color:#6c757c;">
+                        <strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}</strong></a>
+                       <div class='btn-group'>
+                        <a href="{% url 'make_feature' pk=post.pk %}"  style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="feature the post">
+                          <span data-feather="award" style = 'color:#30e225;list-style:none;text-decoration:none;width: 20px;height: 20px;'></span>
+                        </a>
+                        <a href="{% url 'update_post' pk=post.pk %}" class='px-2' type="button" style ="text-decoration:none;" data-toggle="tooltip" data-placement="top" title="click to edit">
+                          <span data-feather="edit" style = 'color:purple;'></span>
+                        </a>
+                        <a href='{% url "delete_by_admin" pk=post.pk %}' style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="click to delete">
+                          <span data-feather="trash-2" style = 'color:red;'></span>
+                        </a>
                       </div>
-                    </div> 
+                     </div>
+                     {{ post.content|truncatechars:120|striptags }}
+                    </div>
+                  </div> 
                   {% else %}
                     <div class="media text-muted pt-3">
-                      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-5">
-                      <a href={{post.get_absolute_url}} style="list-style:none;text-decoration:none;color:#6c757c;"><strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}</strong></a>
+                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-2 query-class">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                        <a href={{post.get_absolute_url}} style="list-style:none;text-decoration:none;color:#6c757c;"><strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}</strong></a>
+                      
+                      <div class='btn-group'>
+                        <a href="{% url 'make_feature' pk=post.pk %}"  style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="feature the post">
+                          <span data-feather="award" style = 'color:#05b1cc;list-style:none;text-decoration:none;'></span>
+                        </a>
+                        <a href="{% url 'update_post' pk=post.pk %}" class='px-2' type="button" style ="text-decoration:none;" data-toggle="tooltip" data-placement="top" title="click to edit">
+                          <span data-feather="edit" style = 'color:purple;'></span>
+                        </a>
+                        <a href='{% url "delete_by_admin" pk=post.pk %}' style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="click to delete">
+                          <span data-feather="trash-2" style = 'color:red;'></span>
+                        </a>
+                      </div>
+
+                      </div>
                         {{ post.content|truncatechars:120|striptags }}
-                      </p>
-                      <div>
-                      <a href="{% url 'make_feature' pk=post.pk %}"  style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="feature the post">
-                        <span data-feather="award" style = 'color:#05b1cc;list-style:none;text-decoration:none;'></span>
-                      </a>
-                      <a href="{% url 'update_post' pk=post.pk %}" type="button" style ="text-decoration:none;" data-toggle="tooltip" data-placement="top" title="click to edit">
-                        <span data-feather="edit" style = 'color:purple;'></span>
-                      </a>
-                      <a href='{% url "delete_by_admin" pk=post.pk %}' style ="text-decoration:none;" data-toggle="tooltip" data-placement="bottom" title="click to delete">
-                        <span data-feather="trash-2" style = 'color:red;'></span>
-                      </a>
                       </div>
                     </div>
                   {% endif %}
@@ -90,7 +97,7 @@
                       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                           <a href='{% url 'dashboard_user_posts' username=user.username %}' style="list-style:none;text-decoration:none;color:#6c757c;!important">
-                            <strong class="text-gray-dark">{{ user.first_name }} {{ user.last_name }}</strong>
+                            <strong class="text-gray-dark query-class">{{ user.first_name }} {{ user.last_name }}</strong>
                           </a>
                           <div>
                             {% if user.is_superuser %}
@@ -129,7 +136,7 @@
                             
                           </div>
                         </div>
-                        <span class="d-block">@ {{ user.username }}</span>
+                        <span class="d-block query-class">@ {{ user.username }}</span>
                       </div>
                     </div>
                     {% endfor %}
@@ -154,7 +161,7 @@
                     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                       <div class="d-flex justify-content-between align-items-center w-100">
                         <a href='{% url 'dashboard_category_posts' pk=cat.pk %}' style="list-style:none;text-decoration:none;color:#6c757c;!important">
-                          <strong class="text-gray-dark">{{ cat.category|capfirst }}
+                          <strong class="text-gray-dark query-class">{{ cat.category|capfirst }}
                           </strong>
                         </a>
                         <div>
@@ -183,7 +190,7 @@
                     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                       <div class="d-flex justify-content-between align-items-center w-100">
                         <a href='{% url 'dashboard_tag_posts' tag=tag %}' style="list-style:none;text-decoration:none;color:#6c757c;!important">
-                        <strong class="text-gray-dark">{{ tag|lower|capfirst }}</strong>
+                        <strong class="text-gray-dark query-class">{{ tag|lower|capfirst }}</strong>
                         </a>
                         <a href="{% url 'dashboard_tag_posts' tag=tag %}" style='list-style:none;text-decoration:none;color:#6cf27c;!important'>View Posts</a>
                       </div>
@@ -213,7 +220,7 @@
                         <input type="text" name="category" class="form-control" id="category">
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">+ Add</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                   </form>
                   </div>
                 </div>

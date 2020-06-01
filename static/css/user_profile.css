@@ -1390,7 +1390,7 @@ button.bg-white:focus {
 }
 
 .bg-gradient-default {
-  background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
+  background: linear-gradient(87deg, #396dbb 0, #19d0c7 100%) !important;
 }
 
 @keyframes floating-lg {

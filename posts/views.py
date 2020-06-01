@@ -18,7 +18,7 @@ from hitcount.views import HitCountDetailView
 from comments.models import Comment, Reply
 from .models import Category, Post
 from .forms import PostForm
-from pages.views import gen_tags
+from pages.views import gen_tags, gen_top_categories
 
 
 User = get_user_model()
@@ -38,10 +38,12 @@ class BlogPageView(ListView):
         categories = Category.objects.all()
         latest_post = Post.objects.order_by('-created_on')[0:3]
         tags = gen_tags(posts, 10)
-
+        top3_categories = gen_top_categories(categories, 3)
+        
         context["latest_post"] = latest_post
         context["categories"] = categories
         context["tags"] = tags
+        context["top3_categories"] = top3_categories
 
         return context
     
@@ -159,22 +161,22 @@ def Posts_in_CategoryView(request, id):
     return render(request, 'blog/posts_in_category.html', context)
 
 # this view will add a category if it doesn't exist
-class AddCategoryView(LoginRequiredMixin,UserPassesTestMixin, View):
-    
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        return False
+class AddCategoryView(LoginRequiredMixin, View):
     
     def post(self, request, *args, **kwargs):
         category = request.POST['category']
+        for_not_admin_view = request.POST.get('add_category', 'not_admin')
+        print(for_not_admin_view)
  
         categories = Category.objects.all()
         if category and category.lower() not in [ cat.category.lower() for cat in categories]:
             cat = Category.objects.create(category = category)
             cat.save()
             messages.success(request, f'{category} added as Category')  
-            return redirect('admin-dashboard')
+            if for_not_admin_view == 'add_post_view':
+                return redirect('add_post')
+            else:
+                return redirect('admin-dashboard')
         else:
             messages.error(request, f'{category} is already a Category')  
             return redirect('admin-dashboard')  

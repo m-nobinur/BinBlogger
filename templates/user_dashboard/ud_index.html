@@ -52,24 +52,27 @@
                             </div>
                             {% for post in posts %}
                             <div class="media text-muted pt-3">
-                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-5">
+                                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray mr-2">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
                                     <a href={{post.get_absolute_url}}
                                         style="list-style:none;text-decoration:none;color:#6c757c;">
-                                        <strong class="d-block text-gray-dark">{{ post.title|truncatechars:90 }}
+                                        <strong class="d-block text-gray-dark query-class">{{ post.title|truncatechars:90 }}
                                         </strong>
                                     </a>
-                                    {{ post.content|truncatechars:120|striptags }}
-                                </p>
-                                <div>
-                                    <a href="{% url 'update_post' pk=post.pk %}" type="button"
+                                
+                                <div class='btn-group'>
+                                    <a href="{% url 'update_post' pk=post.pk %}" type="button" class='pr-2'
                                         style="text-decoration:none;" data-toggle="tooltip" data-placement="top"
                                         title="click to edit">
                                         <i class="far fa-edit" style='color:purple'></i>
-                                    </a>
-                                    <a href='{% url "delete_by_author" pk=post.pk %}' style="text-decoration:none;"
+                                        </a>
+                                        <a href='{% url "delete_by_author" pk=post.pk %}' style="text-decoration:none;color:red"
                                         data-toggle="tooltip" data-placement="bottom" title="click to delete">
                                         <i class="far fa-trash-alt p-1"></i>
                                     </a>
+                                </div>
+                                </div>
+                                <span class='query-class'>{{ post.content|truncatechars:120|striptags }}</span>  
                                 </div>
                             </div>
                             {% endfor %}
@@ -88,7 +91,7 @@
                                     <div class="d-flex justify-content-between align-items-center w-100">
                                         <a href='{% url 'ud_category_posts' pk=cat.pk %}'
                                             style="list-style:none;text-decoration:none;color:#6c757c;!important">
-                                            <strong class="text-gray-dark">{{ cat.category|capfirst }}
+                                            <strong class="text-gray-dark query-class">{{ cat.category|capfirst }}
                                             </strong>
                                         </a>
                                         <a href="{% url 'ud_category_posts' pk=cat.pk %}"
@@ -109,7 +112,7 @@
                                     <div class="d-flex justify-content-between align-items-center w-100">
                                         <a href='{% url 'ud_tag_posts' tag=tag %}'
                                             style="list-style:none;text-decoration:none;color:#6c757c;!important">
-                                            <strong class="text-gray-dark">{{ tag|lower|capfirst }}</strong>
+                                            <strong class="text-gray-dark query-class">{{ tag|lower|capfirst }}</strong>
                                         </a>
                                         <a href="{% url 'ud_tag_posts' tag=tag %}"
                                             style='list-style:none;text-decoration:none;color:gray;!important'>View
