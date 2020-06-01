@@ -3,8 +3,14 @@
 db.sqlite3
 **/*.pyc
 **/__pycache__
-media/**
-static/**
+media/posts_image/*
+media/django-summernote/*
+media/profile_pics/*
+media/_versions
+media/*.jpg
+media/*.png
+media/*.jpeg
+
 Pipfile
 Pipfile.lock
 templates/count.html

@@ -1,0 +1,41 @@
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    letter-spacing: -2px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+
+h4 {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+a {
+    color: rgb(84, 233, 133);
+}
+
+a:hover {
+    color: rgb(31, 122, 84);
+}
+
+blockquote {
+    display: block;
+    border-left: 4px solid #0ddfb2;
+    margin-left: -15px;
+    padding-left: 15px;
+    font-style: italic;
+    color: rgb(101, 102, 102);
+}
+
+mark {
+    background-color: yellow;
+    color: black;
+}
