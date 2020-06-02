@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
+{% load hitcount_tags %}
+
 
 {% block title %} BinBlogger {% endblock title %}
 
@@ -24,8 +26,20 @@
                 {% endif %}
               {% endfor %}
             </li>
-            <li class="list-inline-item mx-3"><a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=featured_post.author.username %}">{{featured_post.author}}</a></li>
-            <li class="list-inline-item mx-3"><p class="text-uppercase meta-link font-weight-normal">{{featured_post.created_on|date:"F d, Y"}}</p></li>
+            <li class="list-inline-item mx-3">
+            <a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=featured_post.author.username %}">
+              <i class="fas fa-user-tie"></i> {{featured_post.author}}
+              </a>
+              </li>
+            <li class="list-inline-item mx-3">
+            <p class="text-uppercase meta-link font-weight-normal">
+              <i class="fas fa-calendar-alt"></i> {{featured_post.created_on|date:"F d, Y"}}</p>
+            </li>
+            <li class="list-inline-item mx-2">
+                <p class="text-uppercase meta-link font-weight-normal">
+                    <i class="far fa-eye"></i></i> {% get_hit_count for featured_post %}
+                </p>
+            </li>
           </ul>
             <h1 class="mb-4"> <a class="reset-anchor" href={{featured_post.get_absolute_url}}>{{featured_post.title}}</a></h1>
             <p class="text-muted">{{featured_post.content|striptags|truncatechars:220}}</p>

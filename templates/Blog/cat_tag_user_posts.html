@@ -1,3 +1,5 @@
+{% load hitcount_tags %}
+
   <section class="py-5">
      <div class="container py-4">
        <div class="row">
@@ -27,11 +29,18 @@
                     {% endif %}
                   {% endfor %}
                   <li class="list-inline-item mx-2">
-                    <a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=post.author.username %}">{{post.author.username}}</a>
+                    <a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=post.author.username %}">
+                    <i class="fas fa-user-tie"></i> {{post.author.username}}</a>
                   </li>
                   <li class="list-inline-item mx-2">
-                    <a class="text-uppercase meta-link font-weight-normal" href="#">{{post.created_on|date:"F d, Y"}}</a>
+                    <b class="text-uppercase meta-link font-weight-normal" href="#">
+                    <i class="fas fa-calendar-alt"></i> {{post.created_on|date:"F d, Y"}}</b>
                   </li>
+                  <li class="list-inline-item mx-2">
+                <p class="text-uppercase meta-link font-weight-normal">
+                    <i class="far fa-eye"></i></i> {% get_hit_count for post %}
+                </p>
+            </li>
                 </ul>
                 <h2 class="h3 mb-4"> 
                   <a class="d-block reset-anchor" href={{post.get_absolute_url}}>{{post.title}}</a>

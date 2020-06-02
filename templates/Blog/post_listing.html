@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load hitcount_tags %}
 <div class="row">
     {% if posts %}
     {% for post in posts %}
@@ -18,12 +19,17 @@
             </li>
             <li class="list-inline-item mx-2">
                 <a class="text-uppercase meta-link font-weight-normal" href="{% url 'user_posts' username=post.author.username %}"> 
-                    {{ post.author.first_name }} 
+                   <i class="fas fa-user-tie"></i> {{ post.author.first_name }} 
                 </a>
             </li>
             <li class="list-inline-item mx-2">
                 <p class="text-uppercase meta-link font-weight-normal">
-                    {{post.created_on|date:"F d, Y"}}
+                    <i class="fas fa-calendar-alt"></i> {{post.created_on|date:"F d, Y"}}
+                </p>
+            </li>
+            <li class="list-inline-item mx-2">
+                <p class="text-uppercase meta-link font-weight-normal">
+                    <i class="far fa-eye"></i></i> {% get_hit_count for post %}
                 </p>
             </li>
         </ul>
