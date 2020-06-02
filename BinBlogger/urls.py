@@ -3,7 +3,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from newsleters.views import newsleter_email_list
 urlpatterns = [
        
     path('admin/', admin.site.urls),
@@ -21,6 +21,7 @@ urlpatterns = [
     path('blog/', include('posts.urls')),
     path('profile/', include('profiles.urls')),
     path("binblogger-admin/", include('admin_dashboard.urls')),
+    path("newsleter/subscribe/", newsleter_email_list, name="newsleter_subscribe")
 
 ]
 

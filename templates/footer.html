@@ -8,13 +8,14 @@
     <div class="p-4 bg-light">
       <div class="row align-items-center p-lg-3">
         <div class="col-lg-6 mb-4 mb-lg-0">
-          <h2 class="h3 mb-1">Subscribe to my newsletter</h2>
-          <p class="mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <h2 class="h3 mb-1">Subscribe to Newsletter</h2>
+          <p class="mb-0 text-small">Get updatated regularly via email do subscribe.</p>
         </div>
         <div class="col-lg-6">
-          <form action="#">
+          <form action="{% url 'newsleter_subscribe' %}" method='post'>
+            {% csrf_token %}
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Enter your email address"
+              <input class="form-control" type="email" name='email' placeholder="Enter your email address"
                 aria-label="email address" aria-describedby="button-addon2">
               <div class="input-group-append ml-2">
                 <button class="btn btn-primary" id="button-addon2" type="submit">Subscribe</button>
