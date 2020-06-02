@@ -12,7 +12,7 @@
         <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-instagram text-primary"></i></a></li>
         <li class="list-inline-item"><a class="reset-anchor" href="#"><i class="fab fa-linkedin text-primary"></i></a></li>
       </ul>
-      <a class="navbar-brand" href="index.html"><img src="{% static 'img/binblogger.png' %}" alt="BinBlogger" width="190"></a>
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/binblogger.png' %}" alt="BinBlogger" width="190"></a>
       <a class="reset-anchor text-small mb-0 h6 d-none d-lg-block" href="mailto:nobinkhan.me@gmail.com">
        <small><i class="far fa-envelope mr-2"></i>nobinkhan.me@gmail.com</small> </a>
     </div>
@@ -36,12 +36,12 @@
         <!-- Navbar link-->
         <ul class="navbar-nav mx-auto align-items-center">
           <li class="nav-item"><a class="nav-link {% if view_url == 'home' %}active{% endif %}"
-              href={% url 'home' %}>Home</a></li>
+              href={% url 'home' %}>HOME</a></li>
           <!-- Navbar link-->
           <li class="nav-item"><a class="nav-link {% if view_url == 'blog' %}active{% endif %}"
-              href={% url 'blog' %}>Blog</a></li>
+              href={% url 'blog' %}>BLOG</a></li>
           <li class="nav-item"><a class="nav-link {% if view_url == 'authors' %}active{% endif %}"
-              href={% url 'authors' %}>Authors</a></li>
+              href={% url 'authors' %}>AUTHORS</a></li>
           
         </ul>
         <span class="nav-item">
