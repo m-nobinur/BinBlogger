@@ -17,7 +17,6 @@ media/*.jpeg
 
 Pipfile
 Pipfile.lock
-templates/count.html
 .DS_Store
 
 **/.vscode-test/**
