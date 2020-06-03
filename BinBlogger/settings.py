@@ -93,20 +93,20 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 AUTHENTICATION_BACKENDS = (
 
@@ -158,37 +158,5 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# TINYMCE_DEFAULT_CONFIG = {
-#     'cleanup_on_startup': True,
-#     'custom_undo_redo_levels': 20,
-#     'selector': 'textarea',
-#     'plugins': '''
-#             textcolor save link image media preview codesample contextmenu
-#             table code lists fullscreen  insertdatetime  nonbreaking
-#             contextmenu directionality searchreplace wordcount visualblocks
-#             visualchars code fullscreen autolink lists  charmap print  hr
-#             anchor pagebreak
-#             ''',
-#     'toolbar1': '''
-#             fullscreen preview bold italic underline | fontselect,
-#             fontsizeselect  | forecolor backcolor | alignleft alignright |
-#             aligncenter alignjustify | indent outdent | bullist numlist table |
-#             | link image media | codesample |
-#             ''',
-#     'toolbar2': '''
-#             visualblocks visualchars |
-#             charmap hr pagebreak nonbreaking anchor |  code |
-#             ''',
-#     'contextmenu': 'formats | link image',
-#     'menubar': True,
-#     'statusbar': True,
-# }
-
-# TINYMCE_FILEBROWSER = True
-
 SUMMERNOTE_THEME = 'bs4' 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-FILEBROWSER_DIRECTORY = ''
-DIRECTORY = ''
-
