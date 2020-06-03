@@ -12,6 +12,7 @@ media/django-summernote/*
 !media/profile_pics/.gitkeep
 media/_versions
 media/*.jpg
+!media/default.jpg
 media/*.png
 media/*.jpeg
 
