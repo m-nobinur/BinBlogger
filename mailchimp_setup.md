@@ -1,6 +1,6 @@
 # Mailchimp Setup for Newsleters
 
-If don't have a mailchimp account then sign up for one or login to your mailchimp account.
+If you don't have a mailchimp account then sign up for one or login to your mailchimp account.
 
 1. After login go to account section then extras. Click on extras, you will see Api key. Click on it.
 
@@ -26,8 +26,7 @@ MAILCHIMP_EMAIL_LIST_ID=YOUR_MAILCHIMP_EMAIL_LIST_ID
 
 > ⚠️ make sure not to use any space between the equal(=) sign or any quotations(“) for the keys or ids
 
-
- ---
+---
 
 ## Contribution and Support
 
