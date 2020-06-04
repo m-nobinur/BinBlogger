@@ -1,5 +1,5 @@
-Template used for this project is is Juliette. Link: (https://bootstraptemple.com/p/juliette)
+Template used for this project is named Juliette. Link: (https://bootstraptemple.com/p/juliette)
 
-Javascript library(Jquery), Css Framework(Bootstrap) and some Jquery plugin(medium-editor, prism, multiselect, livesearch, imagepreview) are used in BinBlogger Project.
+Javascript library(Jquery), Css Framework(Bootstrap) and some Jquery plugin(medium-editor, prism, multiselect, etc) are used in BinBlogger Project.
 
 This project also used many 3rd party libraries of Python and Django.These are available in requirements.txt file.
