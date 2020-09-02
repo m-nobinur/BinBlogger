@@ -35,6 +35,6 @@ For that you need to fork the project.
 
 Support this project giving a star ❤️
 
-## Questions, feedback or Contact ?
+## Feedback or Contact
 
 Find me on LinkedIn [@mohammadnobinur](https://www.linkedin.com/in/mohammadnobinur/)
