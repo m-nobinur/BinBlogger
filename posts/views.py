@@ -1,100 +1,75 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import ( ListView,    
-                                   DetailView,
-                                   CreateView,
-                                   UpdateView,
-                                   DeleteView,
-                                   View,
-                                   )
+from django.views.generic import (
+    CreateView,
+    UpdateView,
+    DeleteView,
+    View,
+)
 
 from hitcount.views import HitCountDetailView
 
 from comments.models import Comment, Reply
 from .models import Category, Post
-from .forms import PostForm
-from pages.views import gen_tags, gen_top_categories
-
 
 User = get_user_model()
 
-# view for blog/blog.html
-class BlogPageView(ListView):
-
-    model = Post
-    template_name = 'blog/blog.html'
-    context_object_name = 'posts'
-    paginate_by = 6
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        posts = Post.objects.all()
-        categories = Category.objects.all()
-        latest_post = Post.objects.order_by('-created_on')[0:3]
-        tags = gen_tags(posts, 10)
-        top3_categories = gen_top_categories(categories, 3)
-        
-        context["latest_post"] = latest_post
-        context["categories"] = categories
-        context["tags"] = tags
-        context["top3_categories"] = top3_categories
-
-        return context
-    
 # view for blog/add_post.html
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
-    
+
     model = Post
     template_name = "blog/add_post.html"
-    fields = [ 'title', 'post_thumbnail', 'tags', 
-                  'content', 'categories',
-                  'featured',
-                 ]
+    fields = ['title', 'post_thumbnail', 'tags',
+              'content', 'categories',
+              'featured',
+              ]
     success_url = '/blog'
-    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
 # view for blog/update_post.html
-class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin,UserPassesTestMixin, UpdateView):
-    
+class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
     model = Post
     template_name = "blog/update_post.html"
-    fields = [ 'title', 'post_thumbnail', 'tags', 
-                  'content', 'categories', 'featured',
-                 ]
-    
+    fields = ['title', 'post_thumbnail', 'tags',
+              'content', 'categories', 'featured',
+              ]
+
     success_message = 'Post Updated'
-    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
+
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author or self.request.user.is_superuser:
             return True
         return False
 
-class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+
+class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = '/blog'
     success_message = 'Post Deleted'
-    
+
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author or self.request.user.is_superuser:
             return True
         return False
-    
+
 
 # view for blog/post_details.html
 class PostDetailView(HitCountDetailView):
@@ -120,21 +95,21 @@ class PostDetailView(HitCountDetailView):
 
 # view for blog/user_posts.html
 def UserPostsView(request, username):
-    user = get_object_or_404(User, username= username)
+    user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user).order_by('-created_on')
     # pagination
-    paginator = Paginator(posts, 8) # Show 8 posts per page
+    paginator = Paginator(posts, 8)  # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     posts_count = posts.count()
     comments_count = Comment.objects.filter(author=user).count()
     replies_count = Reply.objects.filter(author=user).count()
     total_user_comments = int(comments_count) + int(replies_count)
-    
+
     context = {
         'author_user': user,
-        'posts_count':posts_count,
-        'comments_count':total_user_comments,
+        'posts_count': posts_count,
+        'comments_count': total_user_comments,
         'page_obj': page_obj,
     }
 
@@ -143,45 +118,46 @@ def UserPostsView(request, username):
 
 # view for blog/posts_in_category.html
 def Posts_in_CategoryView(request, id):
-    
-    category = get_object_or_404(Category, id = id)
+
+    category = get_object_or_404(Category, id=id)
     posts_in_cat = category.post_set.all()
 
     # pagination
-    paginator = Paginator(posts_in_cat, 8) # Show 8 posts per page
+    paginator = Paginator(posts_in_cat, 8)  # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
-            'posts_in_cat':posts_in_cat,
-            'cat_name': category,
-            'page_obj': page_obj,
+        'posts_in_cat': posts_in_cat,
+        'cat_name': category,
+        'page_obj': page_obj,
     }
 
     return render(request, 'blog/posts_in_category.html', context)
 
 # this view will add a category if it doesn't exist
+
+
 class AddCategoryView(LoginRequiredMixin, View):
-    
+
     def post(self, request, *args, **kwargs):
         category = request.POST['category']
         for_not_admin_view = request.POST.get('add_category', 'not_admin')
         print(for_not_admin_view)
- 
+
         categories = Category.objects.all()
-        if category and category.lower() not in [ cat.category.lower() for cat in categories]:
-            cat = Category.objects.create(category = category)
+        if category and category.lower() not in [cat.category.lower() for cat in categories]:
+            cat = Category.objects.create(category=category)
             cat.save()
-            messages.success(request, f'{category} added as Category')  
+            messages.success(request, f'{category} added as Category')
             if for_not_admin_view == 'add_post_view':
                 return redirect('add_post')
             else:
                 return redirect('admin-dashboard')
         else:
-            messages.error(request, f'{category} is already a Category')  
-            return redirect('admin-dashboard')  
-    
-    
+            messages.error(request, f'{category} is already a Category')
+            return redirect('admin-dashboard')
+
 
 # view for blog/tag_posts.html
 def TagPostsView(request, tag):
@@ -189,16 +165,14 @@ def TagPostsView(request, tag):
     posts_in_tag = Post.objects.filter(tags__icontains=tag).all()
 
     # pagination
-    paginator = Paginator(posts_in_tag, 7) # Show 4 posts per page
+    paginator = Paginator(posts_in_tag, 7)  # Show 4 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
-            'posts_in_tag':posts_in_tag,
-            'page_obj': page_obj,
-            'tag_name': tag,
+        'posts_in_tag': posts_in_tag,
+        'page_obj': page_obj,
+        'tag_name': tag,
     }
 
     return render(request, 'blog/tag_posts.html', context)
-
-
