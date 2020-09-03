@@ -9,7 +9,6 @@ from hitcount.models import HitCount, HitCountMixin
 # django resize package
 from django_resized import ResizedImageField
 
-
 User = get_user_model()
 
 # Categories model for Categorize every post
@@ -68,7 +67,7 @@ class Post(models.Model):
             
         super(Post, self).save(*args, **kwargs)
         
-    # delete everything when delete this model 
+    # delete thumnail too 
     def delete(self, *args, **kwargs):
         self.post_thumbnail.delete()
         
