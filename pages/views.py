@@ -103,10 +103,6 @@ class SearchView(View):
 
         return render(request, 'pages/search.html', context)
 
-# view for about page/about.html
-class AboutView(TemplateView):
-    template_name = "about.html"
-
 # view for contact page/contact.html
-class ContactView(View):
-    pass
+class ContactView(TemplateView):
+    template_name = "pages/contact.html"

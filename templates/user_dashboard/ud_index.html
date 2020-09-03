@@ -8,22 +8,7 @@
             style='background:#f9fff5;box-shadow: 0px 12px 20px 0px #ffa2b352;margin-bottom: 30px;'>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-4 mb-3 border-bottom p-2">
                 <h1 class="h2">My Dashboard</h1>
-             {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong> {{message}} </strong> 
-                    </div>
-                {% endfor %}
-              <script>
-                setTimeout(function(){
-                $('.alert' ).addClass("flipOutX");
-                setTimeout(function(){
-                  $('.alert' ).remove();
-                },1000);
-              }, 3000);
-              </script>
-            {% endif %}
+                {% include 'alert_msg.html' with messages=messages %}
                 <div class="btn-toolbar mb-4 mb-md-0">
                     <div class="btn-group mr-2">
                         <input id='myInput' class="form-control form-control w-100" type="text" placeholder="Search"

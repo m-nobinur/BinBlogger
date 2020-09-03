@@ -1,0 +1,16 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success animated flipInX alert-dismissible " role="alert" style='position: fixed;bottom: 18px;left: 25px;width: 20%; box-shadow:2px 3px 15px gray; z-index:1000'>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong> {{message}} </strong> 
+        </div>
+    {% endfor %}
+    <script>
+        setTimeout(function(){
+            $('.alert' ).addClass("flipOutX");
+            setTimeout(function(){
+                    $('.alert' ).remove();
+                    },1000);
+              }, 3000);
+    </script>
+{% endif %}
