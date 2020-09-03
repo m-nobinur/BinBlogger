@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, reverse, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .models import Comment, Reply
@@ -15,12 +15,12 @@ def add_comment(request, pk):
                                          post= post,
                                          comment_content=post_comment,)
         comment.save()
-        messages.success(request, 'Commented')  
+        messages.success(request, 'Comment Added.')  
         return redirect(reverse('post-detail', kwargs={
             'pk': pk
         }))
     else:
-        messages.error(request, 'something gone wrong !')
+        messages.error(request, 'something went wrong !')
         return redirect('home')
         
 # add reply to comment view
@@ -33,7 +33,7 @@ def reply_comment(request, ppk, cpk):
                                          comment = comment,
                                          reply_content=reply_content,)
         reply.save()
-        messages.success(request, 'Replied')                                          
+        messages.success(request, 'Replied successfully.')                                          
         return redirect(reverse('post-detail', kwargs={
             'pk': ppk
         }))
@@ -50,17 +50,16 @@ def delete_comment(request, cpk, ppk):
     if request.method == 'POST':
         if request.user == comment.author or request.user.is_superuser or request.user == post.author:
             comment.delete()
-            messages.success(request, 'Deleted') 
+            messages.success(request, 'Comment has been deleted.') 
             return redirect(reverse('post-detail', kwargs={
                 'pk': ppk
             }))
         else:
-            messages.error(request, 'something gone wrong !')
+            messages.error(request, 'something went wrong !')
             return redirect(reverse('post-detail', kwargs={
                 'pk': ppk
             }))
         
-
 #delete reply view
 @login_required
 def delete_reply(request, rpk, cpk, ppk):
