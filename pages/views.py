@@ -15,8 +15,8 @@ User = get_user_model()
 
 users = User.objects.all()
 posts = Post.objects.all()
-latest_post = Post.objects.order_by('-created_on')[0:3]
-popular_post = Post.objects.order_by('-hit_count__hits')[:6]
+latest_posts = Post.objects.order_by('-created_on')[0:3]
+popular_posts = Post.objects.order_by('-hit_count__hits')[:6]
 categories = Category.objects.all()
 top3_categories = gen_top_categories(categories, 3)
 tags = gen_tags(posts, 10)
@@ -37,8 +37,8 @@ class HomePageView(View):
 
         context = {
             'featured_post': featured_post,
-            'latest_post': latest_post,
-            'popular_post': popular_post,
+            'latest_post': latest_posts,
+            'popular_post': popular_posts,
             'top3_categories': top3_categories,
             'categories': categories,
             'tags': tags,
@@ -58,7 +58,7 @@ class BlogPageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["latest_post"] = latest_post
+        context["latest_post"] = latest_posts
         context["categories"] = categories
         context["tags"] = tags
         context["top3_categories"] = top3_categories

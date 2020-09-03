@@ -16,12 +16,19 @@ from hitcount.views import HitCountDetailView
 
 from comments.models import Comment, Reply
 from .models import Category, Post
+from pages.views import (
+    User, posts,
+    latest_posts, popular_posts, 
+    categories
+)
 
-User = get_user_model()
+# pagination
+def paginate(req, page_num=5):
+    paginator = Paginator(posts, page_num) 
+    page_number = req.GET.get('page')
+    return paginator.get_page(page_number)
 
 # view for blog/add_post.html
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
 
     model = Post
@@ -35,7 +42,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
 
 # view for blog/update_post.html
 class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -70,7 +76,6 @@ class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixi
             return True
         return False
 
-
 # view for blog/post_details.html
 class PostDetailView(HitCountDetailView):
     model = Post
@@ -82,8 +87,6 @@ class PostDetailView(HitCountDetailView):
         context = super().get_context_data(**kwargs)
 
         this_post = Post.objects.filter(id=self.object.id)
-        latest_posts = Post.objects.order_by('-created_on')[0:3]
-        popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
         tags = [tag.strip() for tag in this_post[0].tags.split(',')]
 
         context["latest_posts"] = latest_posts
@@ -97,10 +100,7 @@ class PostDetailView(HitCountDetailView):
 def UserPostsView(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user).order_by('-created_on')
-    # pagination
-    paginator = Paginator(posts, 8)  # Show 8 posts per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginate(request, page_num=8)
     posts_count = posts.count()
     comments_count = Comment.objects.filter(author=user).count()
     replies_count = Reply.objects.filter(author=user).count()
@@ -121,11 +121,7 @@ def Posts_in_CategoryView(request, id):
 
     category = get_object_or_404(Category, id=id)
     posts_in_cat = category.post_set.all()
-
-    # pagination
-    paginator = Paginator(posts_in_cat, 8)  # Show 8 posts per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginate(request, page_num=8)
 
     context = {
         'posts_in_cat': posts_in_cat,
@@ -136,16 +132,12 @@ def Posts_in_CategoryView(request, id):
     return render(request, 'blog/posts_in_category.html', context)
 
 # this view will add a category if it doesn't exist
-
-
 class AddCategoryView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         category = request.POST['category']
         for_not_admin_view = request.POST.get('add_category', 'not_admin')
-        print(for_not_admin_view)
 
-        categories = Category.objects.all()
         if category and category.lower() not in [cat.category.lower() for cat in categories]:
             cat = Category.objects.create(category=category)
             cat.save()
@@ -158,16 +150,11 @@ class AddCategoryView(LoginRequiredMixin, View):
             messages.error(request, f'{category} is already a Category')
             return redirect('admin-dashboard')
 
-
 # view for blog/tag_posts.html
 def TagPostsView(request, tag):
 
     posts_in_tag = Post.objects.filter(tags__icontains=tag).all()
-
-    # pagination
-    paginator = Paginator(posts_in_tag, 7)  # Show 4 posts per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginate(request, page_num=7)
 
     context = {
         'posts_in_tag': posts_in_tag,
