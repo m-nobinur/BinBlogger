@@ -15,7 +15,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
              
-    # delete everything when delete this model 
+    # delete profile img too
     def delete(self, *args, **kwargs):
         self.image.delete()
         

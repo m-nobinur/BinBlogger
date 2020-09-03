@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -20,17 +19,16 @@ def Profile_Update(request):
             user_form.save()
             profile_form.save()
             
-            messages.success(request, 'Profile Updated')  
+            messages.success(request, 'Profile updated successfully.')  
             return redirect('profile_update')
     
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
     
-    user = request.user
-    user_posts = Post.objects.filter(author=user)
-    comments_count = Comment.objects.filter(author=user).count()
-    replies_count = Reply.objects.filter(author=user).count()
+    user_posts = Post.objects.filter(author=request.user)
+    comments_count = Comment.objects.filter(author=request.user).count()
+    replies_count = Reply.objects.filter(author=request.user).count()
     comments_count = int(comments_count) + int(replies_count)
     post_counts = user_posts.count() 
     
