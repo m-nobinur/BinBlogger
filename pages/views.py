@@ -14,12 +14,12 @@ from pages.tags_cats_gen import gen_tags, gen_top_categories
 User = get_user_model()
 
 users = User.objects.all()
-posts = Post.objects.all()
+posts = Post.objects.all().order_by('-created_on')
 latest_posts = Post.objects.order_by('-created_on')[0:3]
 popular_posts = Post.objects.order_by('-hit_count__hits')[:6]
 categories = Category.objects.all()
 top3_categories = gen_top_categories(categories, 3)
-tags = gen_tags(posts, 10)
+tags = gen_tags(posts, 12)
 # ---------- global setup end ---------
 
 class HomePageView(View):
