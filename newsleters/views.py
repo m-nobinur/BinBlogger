@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -14,7 +13,6 @@ MAILCHIMP_EMAIL_LIST_ID = config('MAILCHIMP_EMAIL_LIST_ID')
 
 api_url = f'https://{MAILCHIMP_DATA_CENTER}.api.mailchimp.com/3.0'
 members_endpoint = f'{api_url}/lists/{MAILCHIMP_EMAIL_LIST_ID}/members'
-
 
 def subscribe_email(email):
     data = {
