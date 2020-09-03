@@ -25,7 +25,6 @@ tags = gen_tags(posts, 12)
 class HomePageView(View):
 
     def get(self, request, *args, **kargs):
-        global posts
         featured_posts = posts.filter(featured=True).order_by('-updated_on')
         if featured_posts:
             featured_post = featured_posts[0]
@@ -90,9 +89,8 @@ class AuthorPageView(View):
 # search view for pages/search.html
 class SearchView(View):
     def get(self, request, *args, **kargs):
-        global posts
         query = request.GET.get('q')
-
+        posts = Post.objects.all().order_by('-created_on')
         # if query exists then filter posts by query
         if query:
             posts = posts.filter(Q(title__icontains=query) |
