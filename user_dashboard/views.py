@@ -10,7 +10,7 @@ from posts.models import Post, Category
 from pages.tags_cats_gen import gen_tags
 
 # global setup
-def userdb_g_setup(req=None, tag_count=3):
+def get_posts_cats_tags(req=None, tag_count=3):
     posts = Post.objects.filter(author=req.user).order_by('-created_on')
     categories = list(set([cat for post in posts for cat in post.categories.all()]))
     tags = gen_tags(posts, tag_count)
@@ -31,7 +31,7 @@ def userdb_g_setup(req=None, tag_count=3):
 class UserDashboard(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kargs):
-        posts, cat_tup_list, tag_tup_list = userdb_g_setup(request, tag_count=10)
+        posts, cat_tup_list, tag_tup_list = get_posts_cats_tags(request, tag_count=10)
 
         context = {
             'posts': posts,
@@ -50,7 +50,7 @@ class DeletePostbyAuthor(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
 #  Selected categories's posts view
 @login_required
 def user_dashboard_filter_category_posts_view(request, pk):
-    posts, cat_tup_list, tag_tup_list = userdb_g_setup(request, tag_count=15)  
+    posts, cat_tup_list, tag_tup_list = get_posts_cats_tags(request, tag_count=15)  
     category = get_object_or_404(Category, pk=pk)
     cat_posts = category.post_set.all()
 
@@ -66,7 +66,7 @@ def user_dashboard_filter_category_posts_view(request, pk):
 #  Selected tag's posts view
 @login_required
 def user_dashboard_filter_tag_posts_view(request, tag):
-    posts, cat_tup_list, tag_tup_list = userdb_g_setup(request, tag_count=15)  
+    posts, cat_tup_list, tag_tup_list = get_posts_cats_tags(request, tag_count=15)  
 
     tag_filter_posts = Post.objects.filter(
         tags__icontains=tag).all().filter(author=request.user)

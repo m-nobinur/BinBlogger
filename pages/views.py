@@ -10,19 +10,22 @@ from posts.models import Post, Category
 from comments.models import Comment, Reply
 from pages.tags_cats_gen import gen_tags, gen_top_categories
 
+# ---------- global setup start ---------
 User = get_user_model()
 
+users = User.objects.all()
+posts = Post.objects.all()
+latest_post = Post.objects.order_by('-created_on')[0:3]
+popular_post = Post.objects.order_by('-hit_count__hits')[:6]
+categories = Category.objects.all()
+top3_categories = gen_top_categories(categories, 3)
+tags = gen_tags(posts, 10)
+# ---------- global setup end ---------
 
 class HomePageView(View):
 
     def get(self, request, *args, **kargs):
-
-        #  latest post will be deleted later
-        latest_post = Post.objects.order_by('-created_on')[0:3]
-        popular_post = Post.objects.order_by('-hit_count__hits')[:6]
-        categories = Category.objects.all()
-
-        posts = Post.objects.all()
+        global posts
         featured_posts = posts.filter(featured=True).order_by('-updated_on')
         if featured_posts:
             featured_post = featured_posts[0]
@@ -31,9 +34,6 @@ class HomePageView(View):
                 featured_post = posts[len(posts)-1]
             else:
                 featured_post = None
-
-        top3_categories = gen_top_categories(categories, 3)
-        tags = gen_tags(posts, 10)
 
         context = {
             'featured_post': featured_post,
@@ -58,12 +58,6 @@ class BlogPageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        posts = Post.objects.all()
-        categories = Category.objects.all()
-        latest_post = Post.objects.order_by('-created_on')[0:3]
-        tags = gen_tags(posts, 10)
-        top3_categories = gen_top_categories(categories, 3)
-
         context["latest_post"] = latest_post
         context["categories"] = categories
         context["tags"] = tags
@@ -72,12 +66,10 @@ class BlogPageView(ListView):
         return context
 
 # authors page view
-
-
 class AuthorPageView(View):
 
     def get(self, request, *args, **kargs):
-        users = User.objects.all()
+        
         authors = []
         for user in users:
             user_posts = Post.objects.filter(author=user)
@@ -90,7 +82,6 @@ class AuthorPageView(View):
 
         context = {
             'authors': authors,
-
         }
 
         return render(request, 'pages/authors.html', context)
@@ -99,7 +90,7 @@ class AuthorPageView(View):
 # search view for pages/search.html
 class SearchView(View):
     def get(self, request, *args, **kargs):
-        posts = Post.objects.all()
+        global posts
         query = request.GET.get('q')
 
         # if query exists then filter posts by query
@@ -115,13 +106,9 @@ class SearchView(View):
         return render(request, 'pages/search.html', context)
 
 # view for about page/about.html
-
-
 class AboutView(TemplateView):
     template_name = "about.html"
 
 # view for contact page/contact.html
-
-
 class ContactView(View):
     pass
