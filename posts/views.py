@@ -26,7 +26,7 @@ popular_posts = Post.objects.order_by('-hit_count__hits')[:6]
 categories = Category.objects.all()
 
 # pagination
-def paginate(req, page_num=5):
+def paginate(req ,posts=None, page_num=5):
     paginator = Paginator(posts, page_num) 
     page_number = req.GET.get('page')
     return paginator.get_page(page_number)
@@ -102,7 +102,7 @@ class PostDetailView(HitCountDetailView):
 def UserPostsView(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user).order_by('-created_on')
-    page_obj = paginate(request, page_num=8)
+    page_obj = paginate(request, posts=posts, page_num=8)
     posts_count = posts.count()
     comments_count = Comment.objects.filter(author=user).count()
     replies_count = Reply.objects.filter(author=user).count()
@@ -123,7 +123,7 @@ def Posts_in_CategoryView(request, id):
 
     category = get_object_or_404(Category, id=id)
     posts_in_cat = category.post_set.all()
-    page_obj = paginate(request, page_num=8)
+    page_obj = paginate(request, posts=posts_in_cat, page_num=8)
 
     context = {
         'posts_in_cat': posts_in_cat,
@@ -156,7 +156,7 @@ class AddCategoryView(LoginRequiredMixin, View):
 def TagPostsView(request, tag):
 
     posts_in_tag = Post.objects.filter(tags__icontains=tag).all()
-    page_obj = paginate(request, page_num=7)
+    page_obj = paginate(request, posts=posts_in_tag, page_num=7)
 
     context = {
         'posts_in_tag': posts_in_tag,

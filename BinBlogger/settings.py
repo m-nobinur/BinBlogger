@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'admin_dashboard.apps.AdminDashboardConfig',
     'comments.apps.CommentsConfig',
     'newsleters.apps.NewsletersConfig',
+    'contact.apps.ContactConfig',
 
 ]
 

@@ -42,13 +42,27 @@
     </div>
   </div>
 
-<!-- Tags-->
+  <!-- All categories-->
+  <div class="card rounded-0 border-0 mb-4">
+    <div class="card-body p-0">
+      <h2 class="h5 mb-3">All Categories</h2>
+      <ul class="list-inline">
+        {% for cat in categories %}
+        <li class="list-inline-item my-1 mr-1">
+          <a class="sidebar-tag-link text-info" href={{cat.get_absolute_url}}>{{ cat }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tags-->
   <div class="card rounded-0 border-0 mb-4">
     <div class="card-body p-0">
       <h2 class="h5 mb-3">Tags cloud</h2>
       <ul class="list-inline">
         {% for tag in tags %}
-            <li class="list-inline-item my-1 mr-2"><a class="sidebar-tag-link" href="{% url 'tag_posts' tag=tag %}">{{ tag }}</a></li>
+            <li class="list-inline-item my-1 mr-1"><a class="sidebar-tag-link" href="{% url 'tag_posts' tag=tag %}">{{ tag }}</a></li>
         {% endfor %}
       </ul>
     </div>
