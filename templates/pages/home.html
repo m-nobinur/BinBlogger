@@ -63,13 +63,13 @@
           {% endif %}
           {% if forloop.counter == 2 %}
             <div class="col-lg-4 mb-4 mb-lg-0">
-              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-2.jpg' %}')" href={{cat.get_absolute_url}}>
+              <a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-1.jpg' %}')" href={{cat.get_absolute_url}}>
                 <span class="category-block-title">{{ cat }}</span>
               </a>
             </div>
           {% endif %}
           {% if forloop.counter == 3 %}
-            <div class="col-lg-4"><a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-3.jpg' %}')" href={{cat.get_absolute_url}}><span
+            <div class="col-lg-4"><a class="category-block bg-center bg-cover" style="background: url('{% static 'img/cat-1.jpg' %}')" href={{cat.get_absolute_url}}><span
             class="category-block-title">{{cat}}</span></a></div>
           {% endif %}
         {% endfor %}

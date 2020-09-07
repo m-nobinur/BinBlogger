@@ -24,7 +24,7 @@
         <h2 class="h5 mb-3">Trending categories</h2>
         {% for cat in top3_categories %}
             {% if forloop.counter == 1 %}
-              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/cat-2.jpg' %})" href={{cat.get_absolute_url}}>
+              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/cat-1.jpg' %})" href={{cat.get_absolute_url}}>
                 <span class="category-block-title">{{cat}}</span>
               </a>
             {% endif %}
@@ -34,7 +34,7 @@
               </a>
             {% endif %}
             {% if forloop.counter == 3 %}
-              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/cat-2.jpg' %})" href={{cat.get_absolute_url}}>
+              <a class="category-block category-block-sm bg-center bg-cover mb-2" style="background: url({% static 'img/cat-1.jpg' %})" href={{cat.get_absolute_url}}>
                 <span class="category-block-title">{{cat}}</span>
               </a>
             {% endif %}
