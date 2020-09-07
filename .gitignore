@@ -4,6 +4,8 @@ db.sqlite3
 **/*.pyc
 **/__pycache__
 
+**/migrations/*
+!**/migrations/__init__.py
 media/posts_image/*
 media/profile_pics/*
 media/django-summernote/*
