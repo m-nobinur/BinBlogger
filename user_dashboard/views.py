@@ -7,6 +7,7 @@ from django.views.generic import(View,
                                  )
 
 from posts.models import Post, Category
+
 from pages.tags_cats_gen import gen_tags
 
 # global setup

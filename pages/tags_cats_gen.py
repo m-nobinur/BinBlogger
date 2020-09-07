@@ -16,7 +16,7 @@ def gen_tags(post_list, num=3):
 
 
 # generates top categories
-def gen_top_categories(cat_list, num: int = 3):
+def gen_top_categories(cat_list, num=3):
     """this function is responsible to generate variable number top categories 
 
     Args:
@@ -26,9 +26,6 @@ def gen_top_categories(cat_list, num: int = 3):
     Returns:
         list: A list of top categories
     """
+    top_categories = sorted(cat_list, key=lambda x: len(x.post_set.all()), reverse=True)
 
-    top_categories = []
-    top_categories = sorted(cat_list, key=lambda x: len(
-        x.post_set.all()), reverse=True)[:num]
-
-    return top_categories
+    return top_categories[:num]

@@ -16,11 +16,14 @@ from hitcount.views import HitCountDetailView
 
 from comments.models import Comment, Reply
 from .models import Category, Post
-from pages.views import (
-    User, posts,
-    latest_posts, popular_posts, 
-    categories
-)
+
+# ---------- global setup start ---------
+User = get_user_model()
+users = User.objects.all()
+posts = Post.objects.all().order_by('-created_on')
+latest_posts = Post.objects.order_by('-created_on')[0:3]
+popular_posts = Post.objects.order_by('-hit_count__hits')[:6]
+categories = Category.objects.all()
 
 # pagination
 def paginate(req, page_num=5):

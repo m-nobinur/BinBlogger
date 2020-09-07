@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, DeleteView, ListView, UpdateView
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -7,10 +8,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from posts.models import Post, Category
 from user_dashboard.views import get_posts_cats_tags
-from pages.views import (
-    User, users,
-    categories
-)
+
+User = get_user_model()
+users = User.objects.all()
+posts = Post.objects.all().order_by('-created_on')
+categories = Category.objects.all()
 
 # view for admin Dashboard home page
 class AdminDbView(LoginRequiredMixin, UserPassesTestMixin, View):
