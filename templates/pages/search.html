@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  {% include 'blog/cat_tag_user_posts.html' with page_obj=page_obj query=query%}
+  <!-- search -->
+  <div class="container pt-4 mb-0 pb-0">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-5">
+        <!-- search Section-->
+        <section class='pb-2'>
+          <div class="container pt-4 mb-0 pb-0 pt-0">
+            <div class="bg-light" style = 'box-shadow: 0px 1px 7px 0px #9cf9f073;border-radius: 5px;'>
+                  <form action="{% url 'search' %}">
+                    <div class="input-group">
+                      <input style = 'border-radius:6px; font-family:roboto;' class="form-control" name ='q' type="search" placeholder="Search"
+                        aria-label="email address" aria-describedby="button-addon2">
+                    </div>
+                  </form>
+              </div>
+            </div>
+        </section>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+  
+{% include 'blog/cat_tag_user_posts.html' with page_obj=page_obj query=query%}
 
 {% endblock content %}
