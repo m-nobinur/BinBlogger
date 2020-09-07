@@ -2,21 +2,21 @@
 
 ◎◎ A comprehensive multi-user blog app ◎◎
 
-## Usage
+## Description
 
-If you need a **full featured Django Blog** app then you can use this project to develop your Blog by customizing and extending fucntionalities. This project contains almost every fucntionality a blog need.
+This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every fucntionality a multi-user blog needs.
 
-> [!CAUTION]
+> [❗]
 > Look through the setup process before using this project so that you can avoid errors.
 
 ## Features
 
-> ℹ️ watch the attachted images for better view of features
+> ℹ️  watch the attachted images for better view of features
 
 - Multi User Authentication
 - Post CRUD
 - [Visual Post editor](demo_images/visual_editor.png) (medium-editor plugin)
-- [Featured Post](demo_images/featured_post.png) ( based on views)
+- [Featured Post](demo_images/featured_post.png)
 - [Popular Posts](demo_images/popular_posts.png) and [Recent posts](demo_images/recent_posts.png)
 - Post views count
 - [Comments and Reply](demo_images/comments_reply.png) Functionalities
@@ -134,13 +134,19 @@ MAILCHIMP_EMAIL_LIST_ID=''
 > ℹ️
 > If you want to setup Mailchimp now then go to this [section](mailchimp_setup.md)
 
-4. You are all setup, let’s migrate now.
+4. Make a migrations.
+
+```bash
+python manage.py makemigrations
+```
+
+5. You are all setup, let’s migrate now.
 
 ```bash
 python manage.py migrate
 ```
 
-5. Create a superuser to rule the site 😎
+6. Create a superuser to rule the site 😎
 
 ```bash
 python manage.py create superuser
@@ -166,6 +172,6 @@ For that you need to fork the project.
 
 Support this project giving a star ❤️
 
-## Questions, feedback or Contact ?
+## Contact
 
 Find me on LinkedIn [@mohammadnobinur](https://www.linkedin.com/in/mohammadnobinur/)
