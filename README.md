@@ -2,7 +2,7 @@
 
 ◎◎ A comprehensive multi-user blog app ◎◎
 
-## Description
+## Descriptions
 
 This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every fucntionality a multi-user blog needs.
 

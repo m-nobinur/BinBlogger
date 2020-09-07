@@ -19,7 +19,7 @@ def get_posts_cats_tags(req=None, tag_count=3, admin=True):
         categories = list(set([cat for post in posts for cat in post.categories.all()]))
         tags = gen_tags(posts, tag_count)
         for cat in categories:
-                user_post_count = cat.post_set.all().count()
+                user_post_count = cat.post_set.all().filter(author=req.user).count()
                 cat_tup_list.append((cat, user_post_count))
         for tag in tags:
             tag_posts = Post.objects.filter(tags__icontains=tag).all()
@@ -30,7 +30,7 @@ def get_posts_cats_tags(req=None, tag_count=3, admin=True):
         categories = list(set([cat for post in posts for cat in post.categories.all()]))
         tags = gen_tags(posts, tag_count)
         for cat in categories:
-            user_post_count = cat.post_set.all().count()
+            user_post_count = cat.post_set.all().filter(author=req.user).count()
             cat_tup_list.append((cat, user_post_count))
         for tag in tags:
             tag_posts = Post.objects.filter(tags__icontains=tag).all().filter(author=req.user)
@@ -63,7 +63,7 @@ class DeletePostbyAuthor(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
 def user_dashboard_filter_category_posts_view(request, pk):
     posts, cat_tup_list, tag_tup_list = get_posts_cats_tags(request, tag_count=15, admin=False)  
     category = get_object_or_404(Category, pk=pk)
-    cat_posts = category.post_set.all()
+    cat_posts = category.post_set.all().filter(author=request.user)
 
     context = {
         'posts': cat_posts,
