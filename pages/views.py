@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.http import HttpResponseRedirect
 from django.views.generic import(View,
-                                 TemplateView,
                                  ListView,
                                  )
 
 from posts.models import Post, Category
 from comments.models import Comment, Reply
+from contact.models import Message
 from .tags_cats_gen import gen_tags, gen_top_categories
 
 User = get_user_model()
@@ -127,5 +129,22 @@ class SearchView(View):
         return render(request, 'pages/search.html', context)
 
 # view for contact page/contact.html
-class ContactView(TemplateView):
-    template_name = "pages/contact.html"
+class ContactView(View):
+    def get(self, request, *args, **kargs):
+        return render(request, 'pages/contact.html')
+    
+    def post(self, request, *args, **kargs):
+        name = request.POST.get('txtName', None)
+        email = request.POST.get('txtEmail', None)
+        phone = request.POST.get('txtPhone', None)
+        massage = request.POST.get('txtMsg', None)
+
+        contact = Message.objects.create(name=name,
+                                        email= email,
+                                        phone=phone,
+                                        massage= massage,
+                    )
+        contact.save()
+        messages.success(request, 'Your massage has been recorded.')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+       

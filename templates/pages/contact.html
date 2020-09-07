@@ -61,10 +61,12 @@
     <div class="contact-image">
         <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
     </div>
-    <form method="post">
+    <form method="post" >
+        {% csrf_token %}
         <h3>Drop Us a Message</h3>
        <div class="row">
             <div class="col-md-6">
+                {% include 'alert_msg.html' with messages=messages %}
                 <div class="form-group">
                     <input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
                 </div>
