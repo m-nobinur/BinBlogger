@@ -1,42 +1,37 @@
 # BinBlogger
 
-◎◎ A comprehensive multi-user blog app ◎◎
+◎◎ A comprehensive multi-user blog app
+
+![BinBlogger](demo_images/binblogger_home.gif)
 
 ## Descriptions
 
 This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every fucntionality a multi-user blog needs.
 
-> [❗]
-> Look through the setup process before using this project so that you can avoid errors.
+> [❗] Look through the setup process before using this project so that you can avoid errors.
 
-## Features
-
-> ℹ️  watch the attachted images for better view of features
+## Blog Features
 
 - Multi User Authentication
 - Post CRUD
-- [Visual Post editor](demo_images/visual_editor.png) (medium-editor plugin)
-- [Featured Post](demo_images/featured_post.png)
-- [Popular Posts](demo_images/popular_posts.png) and [Recent posts](demo_images/recent_posts.png)
-- Post views count
-- [Comments and Reply](demo_images/comments_reply.png) Functionalities
-- Categories and [top Categories](demo_images/categories.png)(based on posts count)
-- [Tag Functionalities](demo_images/tags.png)
-- Profile create on registration
-- [Profile Update](demo_images/profile_update.png) after registration
-- [Preview image](demo_images/preview.png) before upload
+- Comments and Reply Functionalities
+- Search Fuctionalies
+- Tag, Categories and top Categories(based on posts count) Functionalities.
+- Profile create & Profile Update on registration
+- Visual Post editor(medium-editor plugin)
+- Featured Post, Popular Posts and Recent posts
+- Post views count.
+- Redirect alert massages.
+- Preview image before upload.
 - Auto image optimization on upload.
-- [Authors page](demo_images/authors_page.png) with posts and commnets count
-- Page for posts of individual [tag](demo_images/tag_posts.png), [category](demo_images/category_posts.png) and [user](demo_images/user_posts.png)
-- [Search Fuctionalies](demo_images/search.png)
-- User Restictions to view pages
+- Authors page with posts and commnets count.
+- Page for posts of individual tag, category and user.
+- User Authentication to view pages
 - Delete post-thumbnail when post deleted
-- [Admin Panel](demo_images/admin_db.png) with Jquery live search
-- [User dashboard](demo_images/user_dashboard.png) with Jquery live search
-- [Newsleters](demo_images/newsleters.png)
-- [Category multi-select](demo_images/multiselect.png) functionalities (Jquery multiselect plugin)
-- [Python Code syntax highlighter](demo_images/codehighlight.png) on Details view(Jquery prism plugin)
-- [Redirect alert](demo_images/massage.png)
+- Admin Panel &User dashboard with Jquery live search
+- Newsleters & Contact Page
+- Category multi-select functionalities (Jquery multiselect plugin)
+- Python Code syntax highlighter on Details view(Jquery prism plugin)
 
 ## Setup Process
 
@@ -167,10 +162,8 @@ Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and rock 🤘
 
 ## Contribution and Support
 
-If you want you can to contribute to this project.
-For that you need to fork the project.
-
-Support this project giving a star ❤️
+Fork the project to contribute and give a star❤️
+to support.
 
 ## Contact
 
