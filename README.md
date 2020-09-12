@@ -8,7 +8,7 @@
 
 This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every fucntionality a multi-user blog needs.
 
-> [❗] Look through the setup process before using this project so that you can avoid errors.
+ For better view of the project visit the [Demo](http://binblogger.pythonanywhere.com/) Site.
 
 ## Blog Features
 
@@ -32,6 +32,8 @@ This is a **full featured Django Blog** App that is customizable and extendable.
 - Newsleters & Contact Page
 - Category multi-select functionalities (Jquery multiselect plugin)
 - Python Code syntax highlighter on Details view(Jquery prism plugin)
+
+> [❗] Look through the setup process before using this project so that you can avoid errors.
 
 ## Setup Process
 
