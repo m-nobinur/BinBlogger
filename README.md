@@ -3,7 +3,9 @@
 ◎◎ A comprehensive multi-user blog app
 
 [<img src="demo_images/binblogger_home.gif">](http://binblogger.pythonanywhere.com/)
-<small>Click on the thumnail to visit the demo</small>
+
+<small>Click on the thumnail to visit the demo
+</small>
 
 ## Descriptions
 
