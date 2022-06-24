@@ -28,3 +28,4 @@ Pipfile.lock
 **/.venv*/
 tmp/**
 .python-version
+venv/
