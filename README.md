@@ -1,6 +1,7 @@
 # BinBlogger
 
-Built in 2020 on Django 3.1. It isn't maintained.
+> [!WARNING]
+> **This project is no longer maintained.** It was built in 2020 on Django 3.1, and its pinned dependencies are outdated. Use it as a reference, not in production.
 
 <img src="demo_images/binblogger_home.gif">
 
