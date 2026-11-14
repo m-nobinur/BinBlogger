@@ -91,6 +91,8 @@ pipenv shell
 
 ### Step 3
 
+The app reads its secret key and other secrets from the environment. See [.env.example](.env.example) for the variable names.
+
 1. Create a .env file in the project directory, open it with your favorite text editor and paste the below lines
 
 ```.file
