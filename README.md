@@ -1,38 +1,35 @@
 # BinBlogger
 
+Built in 2020 on Django 3.1. It isn't maintained, and the pinned dependencies are old, so treat it as a reference project.
+
 ◎◎ A comprehensive multi-user blog app
 
-[<img src="demo_images/binblogger_home.gif">](http://binblogger.pythonanywhere.com/)
-
-<small>Click on the thumnail to visit the demo
-</small>
+<img src="demo_images/binblogger_home.gif">
 
 ## Descriptions
 
-This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every fucntionality a multi-user blog needs.
-
- For better view of the project visit the [Demo](http://binblogger.pythonanywhere.com/) Site.
+This is a **full featured Django Blog** App that is customizable and extendable. This App contains almost every functionality a multi-user blog needs.
 
 ## Blog Features
 
 - Multi User Authentication
 - Post CRUD
 - Comments and Reply Functionalities
-- Search Fuctionalies
+- Search Functionalities
 - Tag, Categories and top Categories(based on posts count) Functionalities.
 - Profile create & Profile Update on registration
 - Visual Post editor(medium-editor plugin)
 - Featured Post, Popular Posts and Recent posts
 - Post views count.
-- Redirect alert massages.
+- Redirect alert messages.
 - Preview image before upload.
 - Auto image optimization on upload.
-- Authors page with posts and commnets count.
+- Authors page with posts and comments count.
 - Page for posts of individual tag, category and user.
 - User Authentication to view pages
 - Delete post-thumbnail when post deleted
-- Admin Panel &User dashboard with Jquery live search
-- Newsleters & Contact Page
+- Admin Panel & User dashboard with Jquery live search
+- Newsletters & Contact Page
 - Category multi-select functionalities (Jquery multiselect plugin)
 - Python Code syntax highlighter on Details view(Jquery prism plugin)
 
@@ -73,11 +70,11 @@ For installing pipenv run
 pip install pipenv
 ```
 
-1. Now clone the project and navigate to BinBlogger-master
+1. Now clone the project and navigate to BinBlogger
 
 ```bash
 git clone git@github.com:m-nobinur/BinBlogger.git
-cd BinBlogger-master
+cd BinBlogger
 ```
 
 2. Install all the dependencies for the project.
@@ -95,7 +92,7 @@ pipenv shell
 
 ### Step 3
 
-1. Create a .env file in the project directory, open it with your favorite text editor and paste the bellow lines
+1. Create a .env file in the project directory, open it with your favorite text editor and paste the below lines
 
 ```.file
 SECRET_KEY=[YOUR SECRET_KEY]
@@ -149,13 +146,13 @@ python manage.py migrate
 6. Create a superuser to rule the site 😎
 
 ```bash
-python manage.py create superuser
+python manage.py createsuperuser
 
 ```
 
 > *follow the instructions*
 
-6. Hahh! Long wait. Let’s visit the site now
+7. Hahh! Long wait. Let’s visit the site now
 
 ```bash
 python manage.py runserver
@@ -172,4 +169,4 @@ to support.
 
 ## Contact
 
-Find me on LinkedIn [@mohammadnobinur](https://www.linkedin.com/in/mohammadnobinur/)
+Find me on LinkedIn [@mnobinur](https://www.linkedin.com/in/mnobinur/)

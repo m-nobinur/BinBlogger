@@ -37,4 +37,4 @@ Support this project giving a star ❤️
 
 ## Feedback or Contact
 
-Find me on LinkedIn [@mohammadnobinur](https://www.linkedin.com/in/mohammadnobinur/)
+Find me on LinkedIn [@mnobinur](https://www.linkedin.com/in/mnobinur/)
