@@ -1,8 +1,6 @@
 # BinBlogger
 
-Built in 2020 on Django 3.1. It isn't maintained, and the pinned dependencies are old, so treat it as a reference project.
-
-◎◎ A comprehensive multi-user blog app
+Built in 2020 on Django 3.1. It isn't maintained.
 
 <img src="demo_images/binblogger_home.gif">
 
